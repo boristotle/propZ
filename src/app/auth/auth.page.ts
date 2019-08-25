@@ -27,7 +27,7 @@ export class AuthPage implements OnInit {
       setTimeout(() => {
             this.isLoading = false;
             loadingEl.dismiss();
-            this.router.navigateByUrl('/places/tabs/discover');
+            this.router.navigateByUrl('/places/tabs/notifications');
           }, 1500);
     });
   }

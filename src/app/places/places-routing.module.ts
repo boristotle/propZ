@@ -8,7 +8,7 @@ const routes: Routes = [
         component: PlacesPage,
         children: [
             {
-                path: 'discover', children: [
+                path: 'notifications', children: [
                     {
                        path: '',
                        loadChildren: './notifications/notifications.module#NotificationsPageModule'
@@ -19,36 +19,64 @@ const routes: Routes = [
                     },
                     {
                         path: '',
-                        redirectTo: '/places/tabs/discover',
+                        redirectTo: '/places/tabs/notifications',
                         pathMatch: 'full'
                     }
                 ]
             },
             {
-                path: 'offers', children: [
+                path: 'properties', children: [
                     {
                         path: '',
-                        loadChildren: './offers/offers.module#OffersPageModule'
+                        loadChildren: './properties/properties.module#PropertiesPageModule'
                     },
+                    // {
+                    //     path: 'leases/:leaseId',
+                    //     loadChildren: './properties/properties.module#PropertiesPageModule'
+                    // },
                     {
                         path: 'new',
-                        loadChildren: './offers/new-offer/new-offer.module#NewOfferPageModule'
+                        loadChildren: './properties/new-offer/new-offer.module#NewPropertyPageModule'
                     },
                     {
-                        path: 'edit/:placeId',
-                        loadChildren: './offers/edit-offer/edit-offer.module#EditOfferPageModule'
+                        path: 'edit/:propertyId',
+                        loadChildren: './properties/edit-offer/edit-offer.module#EditPropertyPageModule'
                     },
                     {
-                        path: ':placeId',
-                        loadChildren: './offers/place-bookings/place-bookings.module#PlaceBookingsPageModule'
+                        path: ':propertyId',
+                        loadChildren: './properties/property-details/property-details.module#PropertyDetailsPageModule'
                     }
+                ]
+            },
+            {
+                path: 'leases', children: [
+                    {
+                        path: '',
+                        loadChildren: './leases/leases.module#LeasesPageModule'
+                    },
+                    {
+                        path: ':leaseId',
+                        loadChildren: './leases/leases.module#LeasesDetailsPageModule'
+                    },
+                    // {
+                    //     path: 'new',
+                    //     loadChildren: './properties/new-offer/new-offer.module#NewPropertyPageModule'
+                    // },
+                    // {
+                    //     path: 'edit/:propertyId',
+                    //     loadChildren: './properties/edit-offer/edit-offer.module#EditPropertyPageModule'
+                    // },
+                    // {
+                    //     path: ':propertyId',
+                    //     loadChildren: './properties/property-details/property-details.module#PropertyDetailsPageModule'
+                    // }
                 ]
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/places/tabs/discover',
+        redirectTo: '/places/tabs/notifications',
         pathMatch: 'full'
     }
 ];

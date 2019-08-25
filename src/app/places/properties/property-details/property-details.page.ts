@@ -6,11 +6,11 @@ import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-place-bookings',
-  templateUrl: './place-bookings.page.html',
-  styleUrls: ['./place-bookings.page.scss'],
+  selector: 'app-property-details',
+  templateUrl: './property-details.page.html',
+  styleUrls: ['./property-details.page.scss'],
 })
-export class PlaceBookingsPage implements OnInit, OnDestroy {
+export class PropertyDetailsPage implements OnInit, OnDestroy {
   place: Place;
   private placeSub: Subscription;
 
@@ -18,11 +18,11 @@ export class PlaceBookingsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('placeId')) {
-        this.navCtrl.navigateBack('/places/tabs/offers');
+      if (!paramMap.has('propertyId')) {
+        this.navCtrl.navigateBack('/places/tabs/properties');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('placeId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
       });
     });
@@ -32,6 +32,10 @@ export class PlaceBookingsPage implements OnInit, OnDestroy {
     if (this.place) {
       return this.place.id;
     }
+  }
+
+  get leaseId() {
+    return 1;
   }
 
   ngOnDestroy() {

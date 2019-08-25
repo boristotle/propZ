@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-offers',
-  templateUrl: './offers.page.html',
-  styleUrls: ['./offers.page.scss'],
+  selector: 'app-properties',
+  templateUrl: './properties.page.html',
+  styleUrls: ['./properties.page.scss'],
 })
-export class OffersPage implements OnInit, OnDestroy {
+export class PropertiesPage implements OnInit, OnDestroy {
 
   constructor(private placesService: PlacesService, private router: Router) { }
   offers: Place[];
@@ -24,7 +24,7 @@ export class OffersPage implements OnInit, OnDestroy {
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.router.navigate(['/', 'places', 'tabs', 'offers', 'edit', offerId]);
+    this.router.navigate(['/', 'places', 'tabs', 'properties', 'edit', offerId]);
     console.log('Editing item', offerId);
   }
 

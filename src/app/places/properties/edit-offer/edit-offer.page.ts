@@ -26,11 +26,11 @@ export class EditOfferPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('placeId')) {
+      if (!paramMap.has('propertyId')) {
         this.navCtrl.navigateBack('/places/tabs/offers');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('placeId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
         this.form = new FormGroup({
           title: new FormControl(this.place.title, {

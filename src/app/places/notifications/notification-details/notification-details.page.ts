@@ -24,11 +24,11 @@ export class NotificationDetailsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('placeId')) {
-        this.navCtrl.navigateBack('/places/tabs/discover');
+      if (!paramMap.has('propertyId')) {
+        this.navCtrl.navigateBack('/places/tabs/notifications');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('placeId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
         console.log(this.place);
       });
