@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {NavController, ModalController, ActionSheetController} from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Place } from '../../place.model';
-import { CreateBookingComponent } from '../../../leases/create-booking/create-booking.component';
+// import { CreateBookingComponent } from '../../../leases/create-booking/create-booking.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -50,13 +50,13 @@ export class NotificationDetailsPage implements OnInit, OnDestroy {
         {
           text: 'Select Date',
           handler: () => {
-            this.openBookingModal('select');
+            // this.openBookingModal('select');
           }
         },
         {
           text: 'Random Date',
           handler: () => {
-            this.openBookingModal('random');
+            // this.openBookingModal('random');
           }
         },
         {
@@ -70,24 +70,24 @@ export class NotificationDetailsPage implements OnInit, OnDestroy {
 
   }
 
-  openBookingModal(mode: 'select' | 'random') {
-    console.log(mode);
-    this.modalCtrl
-    .create({
-      component: CreateBookingComponent,
-      componentProps: {selectedPlace: this.place, selectedMode: mode}
-    })
-    .then(modalEl => {
-      modalEl.present();
-      return modalEl.onDidDismiss();
-    })
-    .then(resultData => {
-      console.log(resultData.data, resultData.role);
-      if (resultData.role === 'confirm') {
-        console.log('Booked!');
-      }
-    });
-  }
+  // openBookingModal(mode: 'select' | 'random') {
+  //   console.log(mode);
+  //   this.modalCtrl
+  //   .create({
+  //     component: CreateBookingComponent,
+  //     componentProps: {selectedPlace: this.place, selectedMode: mode}
+  //   })
+  //   .then(modalEl => {
+  //     modalEl.present();
+  //     return modalEl.onDidDismiss();
+  //   })
+  //   .then(resultData => {
+  //     console.log(resultData.data, resultData.role);
+  //     if (resultData.role === 'confirm') {
+  //       console.log('Booked!');
+  //     }
+  //   });
+  // }
 
   get placeId() {
     if (this.place) {

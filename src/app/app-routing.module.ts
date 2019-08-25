@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'places', pathMatch: 'full' },
   { path: 'auth', loadChildren: './auth/auth.module#AuthPageModule' },
   { path: 'places', loadChildren: './places/places.module#PlacesPageModule', canLoad: [AuthGuard] },
-  { path: 'bookings', loadChildren: './leases/leases.module#LeasesPageModule', canLoad: [AuthGuard] }
+  // { path: 'leases', loadChildren: './leases/leases.module#LeasesPageModule', canLoad: [AuthGuard] }
 ];
 
 @NgModule({

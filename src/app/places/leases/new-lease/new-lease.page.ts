@@ -5,11 +5,11 @@ import { LoadingController } from '@ionic/angular';
 import { PlacesService } from 'src/app/places/places.service';
 
 @Component({
-  selector: 'app-create-lease',
-  templateUrl: './create-lease.page.html',
-  styleUrls: ['./create-lease.page.scss'],
+  selector: 'app-new-lease',
+  templateUrl: './new-lease.page.html',
+  styleUrls: ['./new-lease.page.scss'],
 })
-export class CreateLeasePage implements OnInit {
+export class NewLeasePage implements OnInit {
   form: FormGroup;
 
   constructor(
@@ -32,36 +32,52 @@ export class CreateLeasePage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required, Validators.min(1)]
       }),
-      dateFrom: new FormControl(null, {
+      leaseStart: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      dateTo: new FormControl(null, {
+      leaseEnd: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
+      rentDue: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
+      lateDays: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
+      lateFee: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
+      deposit: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       })
     });
   }
 
-  onCreateOffer() {
+  onCreateLease() {
     if (!this.form.valid) {
       return;
     }
 
     this.loadingCtrl.create({
-      message: 'Creating place...'
+      message: 'Creating lease...'
     }).then(loadingEl => {
       loadingEl.present();
       this.placesService.addPlace(
       this.form.value.title,
       this.form.value.description,
       +this.form.value.price,
-      new Date(this.form.value.dateFrom),
-      new Date(this.form.value.dateTo)
+      new Date(this.form.value.leaseStart),
+      new Date(this.form.value.leaseEnd)
     ).subscribe(() => {
       loadingEl.dismiss();
       this.form.reset();
-      this.router.navigate(['/places/tabs/offers']);
+      this.router.navigate(['/places/tabs/leases']);
     });
   });
 

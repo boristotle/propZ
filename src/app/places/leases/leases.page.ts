@@ -23,4 +23,8 @@ export class LeasesPage implements OnInit {
     // cancel booking with id offerId
   }
 
+  get leaseId() {
+    return 1;
+  }
+
 }

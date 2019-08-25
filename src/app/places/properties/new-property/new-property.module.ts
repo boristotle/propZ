@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateLeasePage } from './create-lease.page';
+import { NewPropertyPage } from './new-property.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CreateLeasePage
+    component: NewPropertyPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CreateLeasePage]
+  declarations: [NewPropertyPage]
 })
-export class CreateLeasePageModule {}
+export class NewPropertyPageModule {}

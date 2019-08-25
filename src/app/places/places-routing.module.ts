@@ -14,7 +14,7 @@ const routes: Routes = [
                        loadChildren: './notifications/notifications.module#NotificationsPageModule'
                     },
                     {
-                        path: ':placeId',
+                        path: ':propertyId',
                         loadChildren: './notifications/notification-details/notification-details.module#NotificationDetailsPageModule'
                     },
                     {
@@ -30,18 +30,14 @@ const routes: Routes = [
                         path: '',
                         loadChildren: './properties/properties.module#PropertiesPageModule'
                     },
-                    // {
-                    //     path: 'leases/:leaseId',
-                    //     loadChildren: './properties/properties.module#PropertiesPageModule'
-                    // },
                     {
                         path: 'new',
-                        loadChildren: './properties/new-offer/new-offer.module#NewPropertyPageModule'
+                        loadChildren: './properties/new-property/new-property.module#NewPropertyPageModule'
                     },
-                    {
-                        path: 'edit/:propertyId',
-                        loadChildren: './properties/edit-offer/edit-offer.module#EditPropertyPageModule'
-                    },
+                    // {
+                    //     path: 'edit/:propertyId',
+                    //     loadChildren: './properties/edit-property/edit-property.module#EditPropertyPageModule'
+                    // },
                     {
                         path: ':propertyId',
                         loadChildren: './properties/property-details/property-details.module#PropertyDetailsPageModule'
@@ -55,21 +51,17 @@ const routes: Routes = [
                         loadChildren: './leases/leases.module#LeasesPageModule'
                     },
                     {
-                        path: ':leaseId',
-                        loadChildren: './leases/leases.module#LeasesDetailsPageModule'
+                        path: 'new',
+                        loadChildren: './leases/new-lease/new-lease.module#NewLeasePageModule'
                     },
                     // {
-                    //     path: 'new',
-                    //     loadChildren: './properties/new-offer/new-offer.module#NewPropertyPageModule'
-                    // },
-                    // {
                     //     path: 'edit/:propertyId',
-                    //     loadChildren: './properties/edit-offer/edit-offer.module#EditPropertyPageModule'
+                    //     loadChildren: './leases/edit-lease/edit-lease.module#EditLeasePageModule'
                     // },
-                    // {
-                    //     path: ':propertyId',
-                    //     loadChildren: './properties/property-details/property-details.module#PropertyDetailsPageModule'
-                    // }
+                    {
+                        path: ':leaseId',
+                        loadChildren: './leases/lease-details/lease-details.module#LeaseDetailsPageModule'
+                    }
                 ]
             }
         ]

@@ -47,7 +47,7 @@
     <ion-grid no-padding>
       <ion-row>
           <ion-col size-sm="6" offset-sm="3" text-center>
-            <strong>Leases</strong>
+            <strong>Current Lease</strong>
           </ion-col>
       </ion-row>
     </ion-grid>
@@ -76,5 +76,38 @@
         </ion-col> -->
       </ion-row>
     </ion-grid>
+
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col size-sm="6" offset-sm="3" text-center>
+              <strong>Past Leases</strong>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+          <ion-row>
+              <ion-col size="12" size-sm="12" offset-sm="0" text-center>
+                <ion-list>
+                <ion-item
+                    [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
+                  <!-- <ion-thumbnail slot="start">
+                    <ion-img [src]="place.imageUrl"></ion-img>
+                  </ion-thumbnail> -->
+                  <ion-label text-center>
+                    <h2>Jan 12, 2017 - Jan 12, 2018</h2>
+                    <p>$600 / month</p>
+                    <p>Tenants: Fred Fredrickson</p>
+                    <p>Phone: (309) 555-5566</p>
+                    <p>Email: fred@hotmail.com</p>
+                  </ion-label>
+                </ion-item>
+                </ion-list>
+              </ion-col>
+              <!-- <ion-col>
+                <ion-button routerLink="/bookings">Bookings</ion-button>
+              </ion-col> -->
+            </ion-row>
+          </ion-grid>
    
   </ion-content>
