@@ -42,7 +42,7 @@ export class PlacesService {
   );
 
   get places() {
-    return this._properties.asObservable();
+    return this._properties;
   }
 
   constructor(private authService: AuthService) { }

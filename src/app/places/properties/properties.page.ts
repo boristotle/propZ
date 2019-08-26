@@ -3,7 +3,7 @@ import { PlacesService } from '../places.service';
 import { Property } from '../property.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-properties',
@@ -13,13 +13,10 @@ import { Subscription } from 'rxjs';
 export class PropertiesPage implements OnInit, OnDestroy {
 
   constructor(private placesService: PlacesService, private router: Router) { }
-  properties: Property[];
-  private placesSub: Subscription;
+  properties$: Observable<Property[]>;
 
   ngOnInit() {
-    this.placesSub = this.placesService.places.subscribe(places => {
-      this.properties = places;
-    });
+    this.properties$ = this.placesService.places;
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {
@@ -29,8 +26,6 @@ export class PropertiesPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.placesSub) {
-      this.placesSub.unsubscribe();
-    }
+
   }
 }
