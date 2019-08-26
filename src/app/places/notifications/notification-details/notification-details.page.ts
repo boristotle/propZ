@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NavController, ModalController, ActionSheetController} from '@ionic/angular';
 import { PlacesService } from '../../places.service';
-import { Place } from '../../place.model';
 // import { CreateBookingComponent } from '../../../leases/create-booking/create-booking.component';
 import { Subscription } from 'rxjs';
+import { Property } from '../../property.model';
 
 @Component({
   selector: 'app-notification-details',
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./notification-details.page.scss'],
 })
 export class NotificationDetailsPage implements OnInit, OnDestroy {
-  place: Place;
+  place: Property;
   private placeSub: Subscription;
   constructor(
     private navCtrl: NavController,
@@ -28,7 +28,7 @@ export class NotificationDetailsPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/places/tabs/notifications');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
         console.log(this.place);
       });

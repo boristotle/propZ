@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IonItemSliding } from '@ionic/angular';
 import { LeasesService } from '../leases.service';
-import { Leases } from '../leases.model';
+import { Lease } from '../leases.model';
 
 @Component({
   selector: 'app-lease-details',
@@ -11,7 +11,7 @@ import { Leases } from '../leases.model';
   styleUrls: ['./lease-details.page.scss'],
 })
 export class LeaseDetailsPage implements OnInit {
-  loadedBookings: Leases[];
+  loadedBookings: Lease[];
 
   constructor(private bookingsService: LeasesService) { }
 

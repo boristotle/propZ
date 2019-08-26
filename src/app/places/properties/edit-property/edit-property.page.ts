@@ -2,17 +2,17 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
-import { Place } from '../../place.model';
+import { Property } from '../../property.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-edit-offer',
-  templateUrl: './edit-offer.page.html',
-  styleUrls: ['./edit-offer.page.scss'],
+  selector: 'app-edit-property',
+  templateUrl: './edit-property.page.html',
+  styleUrls: ['./edit-property.page.scss'],
 })
-export class EditOfferPage implements OnInit, OnDestroy {
-  place: Place;
+export class EditPropertyPage implements OnInit, OnDestroy {
+  place: Property;
   form: FormGroup;
   private placeSub: Subscription;
 
@@ -27,21 +27,21 @@ export class EditOfferPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
       if (!paramMap.has('propertyId')) {
-        this.navCtrl.navigateBack('/places/tabs/offers');
+        this.navCtrl.navigateBack('/places/tabs/properties');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
-        this.form = new FormGroup({
-          title: new FormControl(this.place.title, {
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          description: new FormControl(this.place.description, {
-            updateOn: 'blur',
-            validators: [Validators.required, Validators.maxLength(180)]
-          }),
-        });
+        // this.form = new FormGroup({
+        //   title: new FormControl(this.place.title, {
+        //     updateOn: 'blur',
+        //     validators: [Validators.required]
+        //   }),
+        //   description: new FormControl(this.place.description, {
+        //     updateOn: 'blur',
+        //     validators: [Validators.required, Validators.maxLength(180)]
+        //   }),
+        // });
       });
 
     });
@@ -53,22 +53,27 @@ export class EditOfferPage implements OnInit, OnDestroy {
     }
   }
 
-  onUpdateOffer() {
+  onUpdateProperty() {
     if (!this.form.valid) {
       return;
     }
     this.loadCtrl.create({
-       message: 'Updating place'
+       message: 'Updating property...'
     }).then(loadingEl => {
       loadingEl.present();
       this.placesService.updatePlace(
       this.place.id,
-      this.form.value.title,
-      this.form.value.description
+      this.form.value.propertyAddress,
+      new Date(this.form.value.purchaseDate),
+      this.form.value.purchasePrice,
+      this.form.value.imageUrl,
+      this.form.value.mortgage,
+      this.form.value.insurance,
+      this.form.value.taxes
       ).subscribe(() => {
         loadingEl.dismiss();
         this.form.reset();
-        this.router.navigate(['/places/tabs/offers']);
+        this.router.navigate(['/places/tabs/properties']);
       });
     });
 

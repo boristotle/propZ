@@ -1,0 +1,15 @@
+<ion-item  [routerLink]="['/', 'places', 'tabs', 'properties', property.id]">
+  <ion-thumbnail slot="start">
+    <ion-img [src]="property.imageUrl"></ion-img>
+  </ion-thumbnail>
+  <ion-label>
+    <h1>{{property.title}}</h1>
+    <div class="property-details">
+      <ion-icon name="calendar" color="secondary"></ion-icon>
+      <ion-text color="tertiary" class="space-left">{{property.availableFrom | date}}</ion-text>
+      <span class="space-left">to</span>
+      <ion-icon name="calendar" class="space-left" color="secondary"></ion-icon>
+      <ion-text color="tertiary" class="space-left">{{property.availableTo | date}}</ion-text>
+    </div>
+  </ion-label>
+</ion-item>

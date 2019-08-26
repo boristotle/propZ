@@ -1,9 +1,13 @@
-export class Leases {
+export class Lease {
     constructor(
-        public id: string,
-        public placeId: string,
-        public userId: string,
-        public placeTitle: string,
-        public guestNumber: number
+        public propertyAddress: string,
+        public leaseStart: Date,
+        public leaseEnd: Date,
+        public rentDue: string,
+        public deposit: string,
+        public rentAmount: string,
+        public lateFee: string,
+        public lateDays: string,
+        public id?: number,
     ) {}
 }

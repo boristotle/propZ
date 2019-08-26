@@ -58,20 +58,25 @@ export class NewPropertyPage implements OnInit {
 
     this.loadingCtrl.create({
       message: 'Creating property...'
-    }).then(loadingEl => {
+    })
+    .then(loadingEl => {
       loadingEl.present();
-      this.placesService.addPlace(
-      this.form.value.title,
-      this.form.value.description,
-      +this.form.value.price,
-      new Date(this.form.value.purchaseDate),
-      null
-    ).subscribe(() => {
-      loadingEl.dismiss();
-      this.form.reset();
-      this.router.navigate(['/places/tabs/properties']);
+      this.placesService
+        .addPlace(
+          this.form.value.propertyAddress,
+          new Date(this.form.value.purchaseDate),
+          this.form.value.purchasePrice,
+          this.form.value.imageUrl,
+          this.form.value.mortgage,
+          this.form.value.insurance,
+          this.form.value.taxes
+        )
+        .subscribe(() => {
+          loadingEl.dismiss();
+          this.form.reset();
+          this.router.navigate(['/places/tabs/properties']);
+        });
     });
-  });
 
   }
 

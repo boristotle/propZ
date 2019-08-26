@@ -34,10 +34,10 @@ const routes: Routes = [
                         path: 'new',
                         loadChildren: './properties/new-property/new-property.module#NewPropertyPageModule'
                     },
-                    // {
-                    //     path: 'edit/:propertyId',
-                    //     loadChildren: './properties/edit-property/edit-property.module#EditPropertyPageModule'
-                    // },
+                    {
+                        path: 'edit/:propertyId',
+                        loadChildren: './properties/edit-property/edit-property.module#EditPropertyPageModule'
+                    },
                     {
                         path: ':propertyId',
                         loadChildren: './properties/property-details/property-details.module#PropertyDetailsPageModule'

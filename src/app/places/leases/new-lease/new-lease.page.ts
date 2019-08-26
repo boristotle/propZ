@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { PlacesService } from 'src/app/places/places.service';
+import { LeasesService } from '../leases.service';
 
 @Component({
   selector: 'app-new-lease',
@@ -13,7 +13,7 @@ export class NewLeasePage implements OnInit {
   form: FormGroup;
 
   constructor(
-    private placesService: PlacesService,
+    private leasesService: LeasesService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
@@ -55,6 +55,10 @@ export class NewLeasePage implements OnInit {
       deposit: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
+      }),
+      rentAmount: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
       })
     });
   }
@@ -66,20 +70,26 @@ export class NewLeasePage implements OnInit {
 
     this.loadingCtrl.create({
       message: 'Creating lease...'
-    }).then(loadingEl => {
+    })
+    .then(loadingEl => {
       loadingEl.present();
-      this.placesService.addPlace(
-      this.form.value.title,
-      this.form.value.description,
-      +this.form.value.price,
-      new Date(this.form.value.leaseStart),
-      new Date(this.form.value.leaseEnd)
-    ).subscribe(() => {
-      loadingEl.dismiss();
-      this.form.reset();
-      this.router.navigate(['/places/tabs/leases']);
+      this.leasesService
+        .addLease(
+        this.form.value.propertyAddress,
+        new Date(this.form.value.leaseStart),
+        new Date(this.form.value.leaseEnd),
+        this.form.value.deposit,
+        this.form.value.rentAmount,
+        this.form.value.rentDue,
+        this.form.value.lateFee,
+        this.form.value.lateDays
+        )
+        .subscribe(() => {
+          loadingEl.dismiss();
+          this.form.reset();
+          this.router.navigate(['/places/tabs/leases']);
+      });
     });
-  });
 
   }
 

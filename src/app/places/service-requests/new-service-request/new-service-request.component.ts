@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Place } from 'src/app/places/place.model';
 import { ModalController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
+import { Property } from '../../property.model';
 
 @Component({
   selector: 'app-new-service-request',
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./new-service-request.component.scss'],
 })
 export class NewServiceRequestComponent implements OnInit {
-  @Input() selectedPlace: Place;
+  @Input() selectedPlace: Property;
   @Input() selectedMode: 'select' | 'random';
   @ViewChild('f') form: NgForm;
   startDate: string;

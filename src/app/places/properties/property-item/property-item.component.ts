@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Place } from '../../place.model';
+import { Property } from '../../property.model';
 
 @Component({
   selector: 'app-property-item',
@@ -7,7 +7,7 @@ import { Place } from '../../place.model';
   styleUrls: ['./property-item.component.scss'],
 })
 export class PropertyItemComponent implements OnInit {
-  @Input() offer: Place;
+  @Input() property: Property;
   constructor() { }
 
   ngOnInit() {}

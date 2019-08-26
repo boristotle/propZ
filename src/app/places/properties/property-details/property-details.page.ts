@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Place } from '../../place.model';
+import { Property } from '../../property.model';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./property-details.page.scss'],
 })
 export class PropertyDetailsPage implements OnInit, OnDestroy {
-  place: Place;
+  place: Property;
   private placeSub: Subscription;
 
   constructor(private route: ActivatedRoute, private navCtrl: NavController, private placesService: PlacesService) { }
@@ -22,7 +22,7 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/places/tabs/properties');
         return;
       }
-      this.placeSub = this.placesService.getPlace(paramMap.get('propertyId')).subscribe(place => {
+      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
       });
     });
