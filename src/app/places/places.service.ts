@@ -19,6 +19,7 @@ export class PlacesService {
         'In the heart of New York City',
         '149.99',
         '100',
+        1
       ),
       new Property(
         '110 W Osceola Ln Cocoa Beach, FL 32931',
@@ -28,6 +29,7 @@ export class PlacesService {
         'A romantic place in Paris ',
         '189.99',
         '100',
+        2
       ),
       new Property(
         '6565 Akins Way Cumming, GA 30041',
@@ -37,6 +39,7 @@ export class PlacesService {
         'Not your average city trip',
         '99.99',
         '100',
+        3
       )
     ]
   );
