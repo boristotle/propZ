@@ -12,29 +12,29 @@ export class PlacesService {
 
   private _properties = new BehaviorSubject<Property[]>([
       new Property(
-        'p1',
+        '123 4th Street Cocoa Beach, FL 32931',
         new Date(),
         'Manhattan Mansion',
-        'In the heart of New York City',
         'https://freshome.com/wp-content/uploads/2015/11/one-mima-tower.png',
+        'In the heart of New York City',
         '149.99',
         '100',
       ),
       new Property(
-        'p2',
+        '110 W Osceola Ln Cocoa Beach, FL 32931',
         new Date(),
         'L\'Amour Toujours',
-        'A romantic place in Paris ',
         'https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg',
+        'A romantic place in Paris ',
         '189.99',
         '100',
       ),
       new Property(
-        'p3',
+        '6565 Akins Way Cumming, GA 30041',
         new Date(),
         'The Foggy Palace',
-        'Not your average city trip',
         'https://www.finestluxuryvacations.com/uploads/residences/img5ac5074b14e7e.jpg',
+        'Not your average city trip',
         '99.99',
         '100',
       )

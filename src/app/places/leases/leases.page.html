@@ -17,15 +17,16 @@
     <ion-row>
       <ion-col size="12" size-sm="12" offset-sm="0" text-center>
         <ion-list>
-        <ion-item
-            [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
+        <ion-item 
+        *ngFor="let lease of (leases$ | async)"
+        [routerLink]="['/', 'places', 'tabs', 'leases', lease.id ]" detail >
           <!-- <ion-thumbnail slot="start">
             <ion-img [src]="place.imageUrl"></ion-img>
           </ion-thumbnail> -->
           <ion-label text-center>
-            <h2>1234 5th Street Cocoa Beach, FL 32931</h2>
+            <h2>{{ lease.propertyAddress}}</h2>
             <h6>Oct 12, 2019 - Oct 12, 2020</h6>
-            <p>$600 / month</p>
+            <p>${{lease.rentAmount}} / month</p>
             <p>Tenants: Bob Bobberson</p>
             <p>Phone: (309) 429-0826</p>
             <p>Email: boristotle@hotmail.com</p>

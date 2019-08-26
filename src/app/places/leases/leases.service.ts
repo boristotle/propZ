@@ -19,7 +19,8 @@ export class LeasesService {
         '149.99',
         '100',
         '200',
-        '20'
+        '20',
+        1
       ),
       new Lease(
         '1234 6th Street',
@@ -29,13 +30,14 @@ export class LeasesService {
         '200',
         '100',
         '200',
-        '20'
+        '20',
+        2
       ),
     ]
   );
 
   get leases() {
-    return this._leases.asObservable();
+    return this._leases;
   }
 
   constructor(private authService: AuthService) { }

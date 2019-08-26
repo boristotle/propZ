@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {LeasesService} from './leases.service';
 import { Lease } from './leases.model';
 import { IonItemSliding } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-leases',
@@ -10,12 +11,12 @@ import { IonItemSliding } from '@ionic/angular';
   styleUrls: ['./leases.page.scss'],
 })
 export class LeasesPage implements OnInit {
-  loadedLeases: Lease[];
+  leases$: Observable<Lease[]>;
 
   constructor(private leasesService: LeasesService) { }
 
   ngOnInit() {
-    // this.loadedLeases = this.leasesService.leases;
+    this.leases$ = this.leasesService.leases;
   }
 
   onCancelBooking(offerId: string, slidingEl: IonItemSliding) {
