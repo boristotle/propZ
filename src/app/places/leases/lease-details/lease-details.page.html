@@ -1,12 +1,52 @@
+
 <ion-header>
     <ion-toolbar>
-        <ion-buttons slot='start'>
+        <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/leases"></ion-back-button>
         </ion-buttons>
-        <ion-title>Lease Details</ion-title>
+        <ion-title *ngIf="lease">{{ lease.propertyAddress }}</ion-title>
     </ion-toolbar>
 </ion-header>
-
-<ion-content>
-    THIS IS THE LEASE DETAILS PAGE
+          
+          <!-- <ion-button margin color="primary" [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">Edit</ion-button> -->
+          
+<ion-content *ngIf="lease">
+<ion-card>
+    <!-- <ion-img [src]="item.src"></ion-img> -->
+    <ion-card-header padding>
+        <ion-card-subtitle text-center>Details</ion-card-subtitle>
+    </ion-card-header>
+    <ion-item>
+        <ion-label>Property Address</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.propertyAddress }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Lease Start</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.leaseStart }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Lease End</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.leaseEnd }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Rent Due</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.rentDue }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Deposit</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.deposit }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Rent Amount</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.rentAmount }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Late Fee</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.lateFee }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Late Days</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.lateDays }}</ion-text>
+    </ion-item>
+</ion-card>
 </ion-content>

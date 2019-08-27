@@ -11,10 +11,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./property-details.page.scss'],
 })
 export class PropertyDetailsPage implements OnInit, OnDestroy {
-  place: Property;
+  property: Property;
   private placeSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private navCtrl: NavController, private placesService: PlacesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private placesService: PlacesService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
@@ -22,15 +25,15 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/places/tabs/properties');
         return;
       }
-      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
-        this.place = place;
+      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(property => {
+        this.property = property;
       });
     });
   }
 
-  get placeId() {
-    if (this.place) {
-      return this.place.id;
+  get propertyId() {
+    if (this.property) {
+      return this.property.id;
     }
   }
 
