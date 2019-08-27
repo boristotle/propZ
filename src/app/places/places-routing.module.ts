@@ -54,13 +54,33 @@ const routes: Routes = [
                         path: 'new',
                         loadChildren: './leases/new-lease/new-lease.module#NewLeasePageModule'
                     },
+                    {
+                        path: 'edit/:leaseId',
+                        loadChildren: './leases/edit-lease/edit-lease.module#EditLeasePageModule'
+                    },
+                    {
+                        path: ':leaseId',
+                        loadChildren: './leases/lease-details/lease-details.module#LeaseDetailsPageModule'
+                    }
+                ]
+            },
+            {
+                path: 'tenants', children: [
+                    {
+                        path: '',
+                        loadChildren: './tenants/tenants.module#TenantsPageModule'
+                    },
+                    {
+                        path: 'new',
+                        loadChildren: './tenants/new-tenant/new-tenant.module#NewTenantPageModule'
+                    },
                     // {
                     //     path: 'edit/:propertyId',
                     //     loadChildren: './leases/edit-lease/edit-lease.module#EditLeasePageModule'
                     // },
                     {
-                        path: ':leaseId',
-                        loadChildren: './leases/lease-details/lease-details.module#LeaseDetailsPageModule'
+                        path: ':tenantId',
+                        loadChildren: './tenants/tenant-details/tenant-details.module#TenantDetailsPageModule'
                     }
                 ]
             }

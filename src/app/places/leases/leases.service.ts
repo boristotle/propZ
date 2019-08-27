@@ -56,8 +56,7 @@ export class LeasesService {
     deposit: string,
     rentAmount: string,
     lateFee: string,
-    lateDays: string,
-    id: number) {
+    lateDays: string) {
     const newLease = new Lease(
         propertyAddress,
         leaseStart,
@@ -66,8 +65,7 @@ export class LeasesService {
         deposit,
         rentAmount,
         lateFee,
-        lateDays,
-        id
+        lateDays
       );
 // tslint:disable-next-line: align
     return this._leases.pipe(
@@ -109,7 +107,7 @@ export class LeasesService {
         lateDays,
         oldLease.id
         );
-      this._leases.next(updatedPlaces);
+      this._leases.next(updatedLeases);
     }));
   }
 }

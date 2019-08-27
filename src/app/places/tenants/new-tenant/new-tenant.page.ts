@@ -2,79 +2,74 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { PlacesService } from 'src/app/places/places.service';
+import { TenantsService } from '../tenants.service';
 
 @Component({
-  selector: 'app-new-property',
-  templateUrl: './new-property.page.html',
-  styleUrls: ['./new-property.page.scss'],
+  selector: 'app-new-tenant',
+  templateUrl: './new-tenant.page.html',
+  styleUrls: ['./new-tenant.page.scss'],
 })
-export class NewPropertyPage implements OnInit {
+export class NewTenantPage implements OnInit {
   form: FormGroup;
 
   constructor(
-    private placesService: PlacesService,
+    private tenantsService: TenantsService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
-      propertyAddress: new FormControl(null, {
+      name: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      description: new FormControl(null, {
+      phone: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(180)]
       }),
-      purchasePrice: new FormControl(null, {
+      email: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.min(1)]
       }),
-      purchaseDate: new FormControl(null, {
+      SSN: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      mortgage: new FormControl(null, {
+      DOB: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      taxes: new FormControl(null, {
-        updateOn: 'change',
-        validators: [Validators.required]
-      }),
-      insurance: new FormControl(null, {
+      DL: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       })
     });
   }
 
-  onCreateProperty() {
+  onCreateTenant() {
     if (!this.form.valid) {
       return;
     }
 
     this.loadingCtrl.create({
-      message: 'Creating property...'
+      message: 'Creating tenant...'
     })
     .then(loadingEl => {
       loadingEl.present();
-      this.placesService
-        .addPlace(
-          this.form.value.propertyAddress,
-          new Date(this.form.value.purchaseDate),
-          this.form.value.purchasePrice,
-          this.form.value.imageUrl,
-          this.form.value.mortgage,
-          this.form.value.insurance,
-          this.form.value.taxes
+      this.tenantsService
+        .addTenant(
+          this.form.value.name,
+          this.form.value.phone,
+          this.form.value.email,
+          this.form.value.SSN,
+          new Date(this.form.value.DOB),
+          this.form.value.DL,
         )
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();
-          this.router.navigate(['/places/tabs/properties']);
+          this.router.navigate(['/places/tabs/tenants']);
         });
     });
 

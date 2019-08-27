@@ -20,17 +20,9 @@ export class NewLeasePage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      title: new FormControl(null, {
+      propertyAddress: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
-      }),
-      description: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required, Validators.maxLength(180)]
-      }),
-      price: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required, Validators.min(1)]
       }),
       leaseStart: new FormControl(null, {
         updateOn: 'change',

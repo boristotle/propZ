@@ -34,10 +34,6 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
     }
   }
 
-  get leaseId() {
-    return 1;
-  }
-
   ngOnDestroy() {
     if (this.placeSub) {
       this.placeSub.unsubscribe();

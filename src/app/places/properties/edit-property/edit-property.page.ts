@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./edit-property.page.scss'],
 })
 export class EditPropertyPage implements OnInit, OnDestroy {
-  place: Property;
+  property: Property;
   form: FormGroup;
   private placeSub: Subscription;
 
@@ -30,26 +30,46 @@ export class EditPropertyPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/places/tabs/properties');
         return;
       }
-      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
-        this.place = place;
-        // this.form = new FormGroup({
-        //   title: new FormControl(this.place.title, {
-        //     updateOn: 'blur',
-        //     validators: [Validators.required]
-        //   }),
-        //   description: new FormControl(this.place.description, {
-        //     updateOn: 'blur',
-        //     validators: [Validators.required, Validators.maxLength(180)]
-        //   }),
-        // });
+      this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(property => {
+        this.property = property;
+        this.form = new FormGroup({
+          propertyAddress: new FormControl(this.property.propertyAddress, {
+            updateOn: 'blur',
+            validators: [Validators.required]
+          }),
+          // description: new FormControl(this.property.description, {
+          //   updateOn: 'blur',
+          //   validators: [Validators.required, Validators.maxLength(180)]
+          // }),
+          purchasePrice: new FormControl(this.property.purchasePrice, {
+            updateOn: 'blur',
+            validators: [Validators.required, Validators.min(1)]
+          }),
+          purchaseDate: new FormControl(this.property.purchaseDate, {
+            updateOn: 'change',
+            validators: [Validators.required]
+          }),
+          mortgage: new FormControl(this.property.mortgage, {
+            updateOn: 'change',
+            validators: [Validators.required]
+          }),
+          taxes: new FormControl(this.property.taxes, {
+            updateOn: 'change',
+            validators: [Validators.required]
+          }),
+          insurance: new FormControl(this.property.insurance, {
+            updateOn: 'change',
+            validators: [Validators.required]
+          })
+        });
       });
 
     });
   }
 
-  get placeId() {
-    if (this.place) {
-      return this.place.id;
+  get propertyId() {
+    if (this.property) {
+      return this.property.id;
     }
   }
 
@@ -62,7 +82,7 @@ export class EditPropertyPage implements OnInit, OnDestroy {
     }).then(loadingEl => {
       loadingEl.present();
       this.placesService.updatePlace(
-      this.place.id,
+      this.property.id,
       this.form.value.propertyAddress,
       new Date(this.form.value.purchaseDate),
       this.form.value.purchasePrice,

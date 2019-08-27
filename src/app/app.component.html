@@ -9,13 +9,13 @@
         <ion-list>
           <ion-menu-toggle menu="m1">
             <ion-item lines="none" routerLink="/places/tabs/notifications" button>
-              <ion-icon name="business" slot="start"></ion-icon>
+              <ion-icon name="notifications" slot="start"></ion-icon>
               <ion-label>Notifications</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle menu="m1">
             <ion-item lines="none" routerLink="/places/tabs/properties" button>
-              <ion-icon name="checkbox-outline" slot="start"></ion-icon>
+              <ion-icon name="home" slot="start"></ion-icon>
               <ion-label>Properties</ion-label>
             </ion-item>
             </ion-menu-toggle>
@@ -25,6 +25,12 @@
                 <ion-label>Leases</ion-label>
               </ion-item>
               </ion-menu-toggle>
+              <ion-menu-toggle menu="m1">
+                <ion-item lines="none" routerLink="/places/tabs/tenants" button>
+                  <ion-icon name="people" slot="start"></ion-icon>
+                  <ion-label>Tenants</ion-label>
+                </ion-item>
+                </ion-menu-toggle>
             <ion-menu-toggle menu="m1">
             <ion-item lines="none" (click)="onLogout()" button>
                 <ion-icon name="exit" slot="start"></ion-icon>

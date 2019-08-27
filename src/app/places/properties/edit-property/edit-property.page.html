@@ -1,44 +1,100 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="'/places/tabs/properties' + placeId"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Edit Button</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button *ngIf="form" (click)="onUpdateProperty()" [disabled]="!form.valid">
-        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-back-button defaultHref="/places/tabs/properties"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Update {{ property?.propertyAddress }}</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="onUpdateProperty()" [disabled]="form && !form.valid">
+                <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
-
+      
 <ion-content padding>
-  <h1>{{ place?.title}} </h1>
-  <p>{{place?.description}}</p>
 
-  <form *ngIf="place" [formGroup]= "form">
-      <ion-grid>
-        <ion-row>
-          <ion-col size-sm="6" offset-sm="3">
+<ion-grid no-padding>
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="3" text-center>
+            <strong>Details</strong>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<form *ngIf="property" [formGroup]="form">
+    <ion-grid>
+    <ion-row>
+        <ion-col size-sm="12" offset-sm="0">
+        <ion-item>
+            <ion-label position="floating">Property Address</ion-label>
+            <ion-input type="text" autocomplete autocorrect formControlName="propertyAddress"></ion-input>
+        </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="0">
             <ion-item>
-              <ion-label position="floating">Title</ion-label>
-              <ion-input type="text" autocomplete autocorrect formControlName="title"></ion-input>
+            <ion-label position="floating">Purchase Price</ion-label>
+                <ion-input type="number" formControlName="purchasePrice"></ion-input>
             </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size-sm="6" offset-sm="3">
+        </ion-col>
+        <ion-col size-sm="6" offset-sm="0">
             <ion-item>
-              <ion-label position="floating">Short Description</ion-label>
-              <ion-textarea rows="3" formControlName="description"></ion-textarea>
+            <ion-label position="floating">Purchase Date</ion-label>
+            <ion-datetime min="2019-01-01" max="2099-12-31" formControlName="purchaseDate"></ion-datetime>
             </ion-item>
-          </ion-col>
-        </ion-row>
-        <!-- <ion-row *ngIf="!form.get('description').valid && form.get('description').touched">
-          <ion-col size-sm="6" offset-sm="3">
-            <p>Description must be between 1 and 180 characters</p>
-          </ion-col>
-        </ion-row> -->
-      </ion-grid>
-    </form>
+        </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+        <ion-col size-sm="12" offset-sm="0">
+            <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea rows="3" formControlName="description"></ion-textarea>
+            </ion-item>
+        </ion-col>
+    </ion-row> -->
+    <ion-row>
+        <ion-col size-sm="12" offset-sm="0">
+            <ion-item>
+                Upload Photos
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<ion-grid padding>
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="3" text-center>
+            <strong>Monthly Expenses</strong>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+  
+<ion-grid>
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="0">
+            <ion-item>
+            <ion-label position="floating">Mortgage</ion-label>
+                <ion-input type="number" formControlName="mortgage"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size-sm="6" offset-sm="0">
+            <ion-item>
+            <ion-label position="floating">Taxes</ion-label>
+            <ion-input type="number" formControlName="taxes"></ion-input>
+        </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="0">
+            <ion-item>
+            <ion-label position="floating">Insurance</ion-label>
+                <ion-input type="number" formControlName="insurance"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+  
+</form>
 </ion-content>

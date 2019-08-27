@@ -21,21 +21,21 @@
           <ion-list>
               <ion-item-sliding>
                 <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">
-                    Edit
+                    Edit Property
                 </ion-item>
               </ion-item-sliding>
               <ion-item-sliding>
-                  <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">
+                  <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'new']">
                       Add Lease
                   </ion-item>
                 </ion-item-sliding>
                 <ion-item-sliding>
-                    <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">
+                    <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'expense']">
                         Add Expense
                     </ion-item>
                   </ion-item-sliding>
                   <ion-item-sliding>
-                    <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">
+                    <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'document']">
                         Add Document
                     </ion-item>
                   </ion-item-sliding>
@@ -90,7 +90,7 @@
               <ion-col size="12" size-sm="12" offset-sm="0" text-center>
                 <ion-list>
                 <ion-item
-                    [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
+                    [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail>
                   <!-- <ion-thumbnail slot="start">
                     <ion-img [src]="place.imageUrl"></ion-img>
                   </ion-thumbnail> -->
