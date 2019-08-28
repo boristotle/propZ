@@ -15,7 +15,7 @@ export class TenantsService {
         '2309-420-9990',
         'bob@bob.com',
         '123-34-4555',
-        new Date('01/02/1977'),
+        '01/02/1977',
         '4-4444-444',
         1
       )
@@ -39,7 +39,7 @@ export class TenantsService {
     phone: string,
     email: string,
     SSN: string,
-    DOB: Date,
+    DOB: string,
     DL: string) {
     const newTenant = new Tenant(
         name,
@@ -66,7 +66,7 @@ export class TenantsService {
     phone: string,
     email: string,
     SSN: string,
-    DOB: Date,
+    DOB: string,
     DL: string
     ) {
     return this.tenants.pipe(

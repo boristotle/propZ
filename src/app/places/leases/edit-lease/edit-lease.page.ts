@@ -83,8 +83,8 @@ export class EditLeasePage implements OnInit, OnDestroy {
       this.leasesService
         .addLease(
         this.form.value.propertyAddress,
-        new Date(this.form.value.leaseStart),
-        new Date(this.form.value.leaseEnd),
+        this.form.value.leaseStart,
+        this.form.value.leaseEnd,
         this.form.value.deposit,
         this.form.value.rentAmount,
         this.form.value.rentDue,

@@ -13,7 +13,7 @@ export class PlacesService {
   private _properties = new BehaviorSubject<Property[]>([
       new Property(
         '110 W Osceola Ln Cocoa Beach, FL 32931',
-        new Date(),
+        '04/15/2018',
         '320,000',
         'https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg',
         '1835',
@@ -23,7 +23,7 @@ export class PlacesService {
       ),
       new Property(
         '6565 Akins Way Cumming, GA 30041',
-        new Date(),
+        '12/16/2016',
         '154,500',
         'https://www.finestluxuryvacations.com/uploads/residences/img5ac5074b14e7e.jpg',
         '1304',

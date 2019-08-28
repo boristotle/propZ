@@ -14,14 +14,14 @@ export class NotificationsService {
       new Notification(
         'Lease expiring in 7 days',
         'Lease Expiring',
-        new Date('10-22-2020'),
+        '10-22-2020',
         1,
         2
       ),
       new Notification(
         'Lease expiring in 11 days',
         'Lease Expiring',
-        new Date('10-22-2020'),
+        '10-22-2020',
         1,
         2
       ),

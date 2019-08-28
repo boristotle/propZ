@@ -13,8 +13,8 @@ export class LeasesService {
   private _leases = new BehaviorSubject<Lease[]>([
       new Lease(
         '1234 5th Street',
-        new Date('10-22-2019'),
-        new Date('10-22-2020'),
+        '10-22-2019',
+        '10-22-2020',
         '22',
         '149.99',
         '100',
@@ -24,8 +24,8 @@ export class LeasesService {
       ),
       new Lease(
         '1234 6th Street',
-        new Date('10-22-2019'),
-        new Date('10-22-2020'),
+        '10-22-2019',
+        '10-22-2020',
         '22',
         '200',
         '100',
