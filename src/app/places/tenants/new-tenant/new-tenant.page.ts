@@ -63,7 +63,7 @@ export class NewTenantPage implements OnInit {
           this.form.value.phone,
           this.form.value.email,
           this.form.value.SSN,
-          new Date(this.form.value.DOB),
+          this.form.value.DOB,
           this.form.value.DL,
         )
         .subscribe(() => {

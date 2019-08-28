@@ -1,7 +1,7 @@
 export class Property {
     constructor(
         public propertyAddress: string,
-        public purchaseDate: Date,
+        public purchaseDate: string,
         public purchasePrice: string,
         // public description: string,
         public imageUrl: string,

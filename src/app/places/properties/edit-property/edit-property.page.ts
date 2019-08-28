@@ -84,7 +84,7 @@ export class EditPropertyPage implements OnInit, OnDestroy {
       this.placesService.updatePlace(
       this.property.id,
       this.form.value.propertyAddress,
-      new Date(this.form.value.purchaseDate),
+      this.form.value.purchaseDate,
       this.form.value.purchasePrice,
       this.form.value.imageUrl,
       this.form.value.mortgage,

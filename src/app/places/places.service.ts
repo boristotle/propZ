@@ -48,7 +48,7 @@ export class PlacesService {
 
   addPlace(
     propertyAddress: string,
-    purchaseDate: Date,
+    purchaseDate: string,
     purchasePrice: string,
     // description: string,
     imageUrl: string,
@@ -79,7 +79,7 @@ export class PlacesService {
   updatePlace(
     placeId: number,
     propertyAddress: string,
-    purchaseDate: Date,
+    purchaseDate: string,
     purchasePrice: string,
     // description: string,
     imageUrl: string,

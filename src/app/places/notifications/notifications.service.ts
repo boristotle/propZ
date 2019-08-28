@@ -43,7 +43,7 @@ export class NotificationsService {
   addNotification(
     description: string,
     category: string,
-    date: Date,
+    date: string,
     propertyId: number,
     leaseId: number) {
     const newNotification = new Notification(

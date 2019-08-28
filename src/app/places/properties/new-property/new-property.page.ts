@@ -64,7 +64,7 @@ export class NewPropertyPage implements OnInit {
       this.placesService
         .addPlace(
           this.form.value.propertyAddress,
-          new Date(this.form.value.purchaseDate),
+          this.form.value.purchaseDate,
           this.form.value.purchasePrice,
           this.form.value.imageUrl,
           this.form.value.mortgage,

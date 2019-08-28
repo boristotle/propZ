@@ -8,11 +8,23 @@
     </ion-toolbar>
 </ion-header>
           
-          <!-- <ion-button margin color="primary" [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">Edit</ion-button> -->
+<!-- <ion-button margin color="primary" [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">Edit</ion-button> -->
           
 <ion-content *ngIf="lease">
 <ion-card>
-    <!-- <ion-img [src]="item.src"></ion-img> -->
+    <ion-list>
+            <ion-item-sliding>
+                <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'expense']">
+                    Add Expense
+                </ion-item>
+                </ion-item-sliding>
+                <ion-item-sliding>
+                    <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'document']">
+                        Add Document
+                    </ion-item>
+            </ion-item-sliding>
+        </ion-list>
+    <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
     <ion-card-header padding>
         <ion-card-subtitle text-center>Details</ion-card-subtitle>
     </ion-card-header>

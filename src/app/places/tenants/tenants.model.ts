@@ -4,7 +4,7 @@ export class Tenant {
         public phone: string,
         public email: string,
         public SSN: string,
-        public DOB: Date,
+        public DOB: string,
         public DL: string,
         public id?: number,
         ) {}

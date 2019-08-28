@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { LeasesService } from '../leases.service';
+import { Property } from '../../property.model';
+import { PlacesService } from '../../places.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-lease',
@@ -11,14 +14,18 @@ import { LeasesService } from '../leases.service';
 })
 export class NewLeasePage implements OnInit {
   form: FormGroup;
+  properties$: Observable<Property[]>;
 
   constructor(
     private leasesService: LeasesService,
+    private placesService: PlacesService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
 
   ngOnInit() {
+    this.properties$ = this.placesService.places;
+
     this.form = new FormGroup({
       propertyAddress: new FormControl(null, {
         updateOn: 'blur',

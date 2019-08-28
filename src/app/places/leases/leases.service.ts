@@ -50,8 +50,8 @@ export class LeasesService {
 
   addLease(
     propertyAddress: string,
-    leaseStart: Date,
-    leaseEnd: Date,
+    leaseStart: string,
+    leaseEnd: string,
     rentDue: string,
     deposit: string,
     rentAmount: string,
@@ -80,8 +80,8 @@ export class LeasesService {
 
   updateLease(
     propertyAddress: string,
-    leaseStart: Date,
-    leaseEnd: Date,
+    leaseStart: string,
+    leaseEnd: string,
     rentDue: string,
     deposit: string,
     rentAmount: string,
