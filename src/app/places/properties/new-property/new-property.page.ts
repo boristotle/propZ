@@ -20,7 +20,7 @@ export class NewPropertyPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      propertyAddress: new FormControl(null, {
+      address: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
@@ -31,6 +31,10 @@ export class NewPropertyPage implements OnInit {
       purchasePrice: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.min(1)]
+      }),
+      homeValue: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
       }),
       purchaseDate: new FormControl(null, {
         updateOn: 'change',
@@ -63,9 +67,10 @@ export class NewPropertyPage implements OnInit {
       loadingEl.present();
       this.placesService
         .addPlace(
-          this.form.value.propertyAddress,
+          this.form.value.address,
           this.form.value.purchaseDate,
           this.form.value.purchasePrice,
+          this.form.value.homeValue,
           this.form.value.imageUrl,
           this.form.value.mortgage,
           this.form.value.insurance,

@@ -4,7 +4,7 @@
         <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/leases"></ion-back-button>
         </ion-buttons>
-        <ion-title *ngIf="lease">{{ lease.propertyAddress }}</ion-title>
+        <ion-title *ngIf="lease">{{ lease.Property.address }}</ion-title>
     </ion-toolbar>
 </ion-header>
           
@@ -30,7 +30,7 @@
     </ion-card-header>
     <ion-item>
         <ion-label>Property Address</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.propertyAddress }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.Property.address }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Lease Start</ion-label>
@@ -41,20 +41,20 @@
         <ion-text fill="outline" slot="end">{{ lease.leaseEnd }}</ion-text>
     </ion-item>
     <ion-item>
-        <ion-label>Rent Due</ion-label>
+        <ion-label>Rent Due (day)</ion-label>
         <ion-text fill="outline" slot="end">{{ lease.rentDue }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Deposit</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.deposit }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.deposit | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Rent Amount</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.rentAmount }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.rentAmount | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Late Fee</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.lateFee }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.lateFee | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Late Days</ion-label>

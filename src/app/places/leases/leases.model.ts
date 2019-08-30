@@ -1,13 +1,13 @@
 export class Lease {
     constructor(
-        public propertyAddress: string,
         public leaseStart: string,
         public leaseEnd: string,
-        public rentDue: string,
-        public deposit: string,
-        public rentAmount: string,
-        public lateFee: string,
-        public lateDays: string,
+        public rentDue: number,
+        public deposit: number,
+        public rentAmount: number,
+        public lateFee: number,
+        public lateDays: number,
         public id?: number,
+        public PropertyId?: number,
     ) {}
 }

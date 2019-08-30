@@ -1,8 +1,9 @@
 export class Property {
     constructor(
-        public propertyAddress: string,
+        public address: string,
         public purchaseDate: string,
         public purchasePrice: string,
+        public homeValue: string,
         // public description: string,
         public imageUrl: string,
         public mortgage: string,

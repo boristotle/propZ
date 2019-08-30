@@ -27,7 +27,7 @@ export class NewLeasePage implements OnInit {
     this.properties$ = this.placesService.places;
 
     this.form = new FormGroup({
-      propertyAddress: new FormControl(null, {
+      PropertyId: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
@@ -74,14 +74,15 @@ export class NewLeasePage implements OnInit {
       loadingEl.present();
       this.leasesService
         .addLease(
-        this.form.value.propertyAddress,
         this.form.value.leaseStart,
         this.form.value.leaseEnd,
         this.form.value.deposit,
         this.form.value.rentAmount,
         this.form.value.rentDue,
         this.form.value.lateFee,
-        this.form.value.lateDays
+        this.form.value.lateDays,
+        this.form.value.PropertyId,
+
         )
         .subscribe(() => {
           loadingEl.dismiss();

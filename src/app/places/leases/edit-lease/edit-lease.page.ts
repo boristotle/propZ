@@ -33,7 +33,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
           this.leasesSub = this.leasesService.getLease(+paramMap.get('leaseId')).subscribe(lease => {
             this.lease = lease;
             this.form = new FormGroup({
-                propertyAddress: new FormControl(this.lease.propertyAddress, {
+                PropertyId: new FormControl(this.lease.PropertyId, {
                   updateOn: 'blur',
                   validators: [Validators.required]
                 }),
@@ -82,7 +82,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
       loadingEl.present();
       this.leasesService
         .addLease(
-        this.form.value.propertyAddress,
+        this.form.value.PropertyId,
         this.form.value.leaseStart,
         this.form.value.leaseEnd,
         this.form.value.deposit,

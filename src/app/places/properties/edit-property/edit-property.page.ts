@@ -33,7 +33,7 @@ export class EditPropertyPage implements OnInit, OnDestroy {
       this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(property => {
         this.property = property;
         this.form = new FormGroup({
-          propertyAddress: new FormControl(this.property.propertyAddress, {
+          address: new FormControl(this.property.address, {
             updateOn: 'blur',
             validators: [Validators.required]
           }),
@@ -44,6 +44,10 @@ export class EditPropertyPage implements OnInit, OnDestroy {
           purchasePrice: new FormControl(this.property.purchasePrice, {
             updateOn: 'blur',
             validators: [Validators.required, Validators.min(1)]
+          }),
+          homeValue: new FormControl(this.property.homeValue, {
+            updateOn: 'change',
+            validators: [Validators.required]
           }),
           purchaseDate: new FormControl(this.property.purchaseDate, {
             updateOn: 'change',
@@ -83,9 +87,10 @@ export class EditPropertyPage implements OnInit, OnDestroy {
       loadingEl.present();
       this.placesService.updatePlace(
       this.property.id,
-      this.form.value.propertyAddress,
+      this.form.value.address,
       this.form.value.purchaseDate,
       this.form.value.purchasePrice,
+      this.form.value.homeValue,
       this.form.value.imageUrl,
       this.form.value.mortgage,
       this.form.value.insurance,

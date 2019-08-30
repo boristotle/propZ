@@ -12,25 +12,23 @@ export class LeasesService {
 
   private _leases = new BehaviorSubject<Lease[]>([
       new Lease(
-        '1234 5th Street',
         '10-22-2019',
         '10-22-2020',
-        '22',
-        '149.99',
-        '100',
-        '200',
-        '20',
+        1,
+        2000,
+        2000,
+        20,
+        3,
         1
       ),
       new Lease(
-        '1234 6th Street',
         '10-22-2019',
         '10-22-2020',
-        '22',
-        '200',
-        '100',
-        '200',
-        '20',
+        30,
+        1500,
+        1500,
+        20,
+        3,
         2
       ),
     ]
@@ -49,23 +47,23 @@ export class LeasesService {
   }
 
   addLease(
-    propertyAddress: string,
     leaseStart: string,
     leaseEnd: string,
-    rentDue: string,
-    deposit: string,
-    rentAmount: string,
-    lateFee: string,
-    lateDays: string) {
+    rentDue: number,
+    deposit: number,
+    rentAmount: number,
+    lateFee: number,
+    lateDays: number,
+    PropertyId: number) {
     const newLease = new Lease(
-        propertyAddress,
         leaseStart,
         leaseEnd,
         rentDue,
         deposit,
         rentAmount,
         lateFee,
-        lateDays
+        lateDays,
+        PropertyId
       );
 // tslint:disable-next-line: align
     return this._leases.pipe(
@@ -79,15 +77,15 @@ export class LeasesService {
   }
 
   updateLease(
-    propertyAddress: string,
     leaseStart: string,
     leaseEnd: string,
-    rentDue: string,
-    deposit: string,
-    rentAmount: string,
-    lateFee: string,
-    lateDays: string,
+    rentDue: number,
+    deposit: number,
+    rentAmount: number,
+    lateFee: number,
+    lateDays: number,
     leaseId: number,
+    PropertyId: number
     ) {
     return this._leases.pipe(
       take(1),
@@ -97,7 +95,6 @@ export class LeasesService {
       const updatedLeases = [...leases];
       const oldLease = updatedLeases[updatedLeaseIndex];
       updatedLeases[updatedLeaseIndex] = new Lease(
-        propertyAddress,
         leaseStart,
         leaseEnd,
         rentDue,
@@ -105,7 +102,8 @@ export class LeasesService {
         rentAmount,
         lateFee,
         lateDays,
-        oldLease.id
+        oldLease.id,
+        PropertyId
         );
       this._leases.next(updatedLeases);
     }));

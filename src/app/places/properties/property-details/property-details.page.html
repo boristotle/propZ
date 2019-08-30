@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places/tabs/properties"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="property">{{property.propertyAddress}}</ion-title>
+    <ion-title *ngIf="property">{{property.address}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -32,41 +32,51 @@
                     Add Document
                 </ion-item>
               </ion-item-sliding>
+              <ion-item-sliding>
+                  <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'archives', propertyId]">
+                      Archived Leases
+                  </ion-item>
+                </ion-item-sliding>
         </ion-list>
       <ion-card-header padding>
         <ion-card-subtitle text-center>Details</ion-card-subtitle>
       </ion-card-header>
       <ion-item>
           <ion-label>Purchase Price</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.purchasePrice }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ property.purchasePrice | currency:'USD' }}</ion-text>
+      </ion-item>
+      <ion-item>
+          <ion-label>Home Value</ion-label>
+          <ion-text fill="outline" slot="end">{{ property.homeValue | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-item>
           <ion-label>Purchase Date</ion-label>
           <ion-text fill="outline" slot="end">{{ property.purchaseDate }}</ion-text>
+      </ion-item>
+      <ion-item>
+          <ion-label>Current Equity</ion-label>
+          <ion-text fill="outline" slot="end">{{ (property.homeValue - property.purchasePrice) | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-card-header padding>
           <ion-card-subtitle text-center>Yearly Expenses</ion-card-subtitle>
       </ion-card-header>
       <ion-item>
           <ion-label>Mortgage</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.mortgage }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ property.mortgage | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-item>
           <ion-label>Taxes</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.taxes }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ property.taxes | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-item>
           <ion-label>Insurance</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.insurance }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-card-header padding>
-          <ion-card-subtitle text-center>Leases</ion-card-subtitle>
+          <ion-card-subtitle text-center>Current Lease</ion-card-subtitle>
       </ion-card-header>
       <ion-item
           [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
-        <!-- <ion-thumbnail slot="start">
-          <ion-img [src]="place.imageUrl"></ion-img>
-        </ion-thumbnail> -->
         <ion-label text-center>
           <h2>Oct 12, 2019 - Oct 12, 2020</h2>
           <p>$600 / month</p>
@@ -75,18 +85,16 @@
           <p>Email: boristotle@hotmail.com</p>
         </ion-label>
       </ion-item>
-      <ion-item
-      [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
-      <!-- <ion-thumbnail slot="start">
-        <ion-img [src]="place.imageUrl"></ion-img>
-      </ion-thumbnail> -->
-      <ion-label text-center>
-        <h2>Oct 12, 2019 - Oct 12, 2020</h2>
-        <p>$600 / month</p>
-        <p>Tenants: Bob Bobberson</p>
-        <p>Phone: (309) 429-0826</p>
-        <p>Email: boristotle@hotmail.com</p>
-      </ion-label>
-    </ion-item>
+      <ion-card-header padding>
+            <ion-card-subtitle text-center>Current Expenses ($5600)</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Expense 1</ion-label>
+            <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Expense 2</ion-label>
+            <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
+        </ion-item>
   </ion-card>
 </ion-content>

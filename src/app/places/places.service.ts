@@ -14,7 +14,8 @@ export class PlacesService {
       new Property(
         '110 W Osceola Ln Cocoa Beach, FL 32931',
         '04/15/2018',
-        '320,000',
+        '320000',
+        '375000',
         'https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg',
         '1835',
         '189.99',
@@ -24,7 +25,8 @@ export class PlacesService {
       new Property(
         '6565 Akins Way Cumming, GA 30041',
         '12/16/2016',
-        '154,500',
+        '154500',
+        '210000',
         'https://www.finestluxuryvacations.com/uploads/residences/img5ac5074b14e7e.jpg',
         '1304',
         '99.99',
@@ -47,18 +49,20 @@ export class PlacesService {
   }
 
   addPlace(
-    propertyAddress: string,
+    address: string,
     purchaseDate: string,
     purchasePrice: string,
+    homeValue: string,
     // description: string,
     imageUrl: string,
     mortgage: string,
     insurance: string,
     taxes: string) {
     const newPlace = new Property(
-      propertyAddress,
+      address,
       purchaseDate,
       purchasePrice,
+      homeValue,
       // description,
       imageUrl || 'https://freshome.com/wp-content/uploads/2015/11/one-mima-tower.png',
       mortgage,
@@ -78,9 +82,10 @@ export class PlacesService {
 
   updatePlace(
     placeId: number,
-    propertyAddress: string,
+    address: string,
     purchaseDate: string,
     purchasePrice: string,
+    homeValue: string,
     // description: string,
     imageUrl: string,
     mortgage: string,
@@ -95,9 +100,10 @@ export class PlacesService {
       const updatedPlaces = [...places];
       const oldPlace = updatedPlaces[updatedPlaceIndex];
       updatedPlaces[updatedPlaceIndex] = new Property(
-        propertyAddress,
+        address,
         purchaseDate,
         purchasePrice,
+        homeValue,
         // description,
         imageUrl || 'https://freshome.com/wp-content/uploads/2015/11/one-mima-tower.png',
         mortgage,

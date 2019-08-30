@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-menu-button menu="m1"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Leases</ion-title>
+      <ion-title>Active Leases</ion-title>
       <ion-buttons slot="primary">
         <ion-button routerLink="/places/tabs/leases/new">
           <ion-icon name="add" slot="icon-only"></ion-icon>
@@ -24,7 +24,7 @@
             <ion-img [src]="place.imageUrl"></ion-img>
           </ion-thumbnail> -->
           <ion-label text-center>
-            <h2>{{ lease.propertyAddress}}</h2>
+            <h2>{{ lease.Property.address}}</h2>
             <h6>Oct 12, 2019 - Oct 12, 2020</h6>
             <p>${{lease.rentAmount}} / month</p>
             <p>Tenants: Bob Bobberson</p>
