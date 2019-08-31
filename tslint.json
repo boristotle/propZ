@@ -60,6 +60,14 @@
       true,
       "single"
     ],
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    },
     "trailing-comma": false,
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

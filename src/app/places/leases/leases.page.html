@@ -25,11 +25,8 @@
           </ion-thumbnail> -->
           <ion-label text-center>
             <h2>{{ lease.Property.address}}</h2>
-            <h6>Oct 12, 2019 - Oct 12, 2020</h6>
-            <p>${{lease.rentAmount}} / month</p>
-            <p>Tenants: Bob Bobberson</p>
-            <p>Phone: (309) 429-0826</p>
-            <p>Email: boristotle@hotmail.com</p>
+            <h6>{{lease.leaseStart}} to {{lease.leaseEnd}}</h6>
+            <p>{{lease.rentAmount | currency:'USD'}}/month</p>
           </ion-label>
         </ion-item>
         </ion-list>

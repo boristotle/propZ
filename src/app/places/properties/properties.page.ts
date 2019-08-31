@@ -3,14 +3,14 @@ import { PlacesService } from '../places.service';
 import { Property } from '../property.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.page.html',
   styleUrls: ['./properties.page.scss'],
 })
-export class PropertiesPage implements OnInit, OnDestroy {
+export class PropertiesPage implements OnInit {
 
   constructor(private placesService: PlacesService, private router: Router) { }
   properties$: Observable<Property[]>;
@@ -25,7 +25,4 @@ export class PropertiesPage implements OnInit, OnDestroy {
     console.log('Editing item', offerId);
   }
 
-  ngOnDestroy() {
-
-  }
 }

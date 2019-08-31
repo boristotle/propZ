@@ -4,6 +4,7 @@ import {LeasesService} from './leases.service';
 import { Lease } from './leases.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-leases',
@@ -13,19 +14,21 @@ import { Observable } from 'rxjs';
 export class LeasesPage implements OnInit {
   leases$: Observable<Lease[]>;
 
-  constructor(private leasesService: LeasesService) { }
+  constructor(
+    private leasesService: LeasesService,
+    private dataService: DataService) { }
 
   ngOnInit() {
-    this.leases$ = this.leasesService.leases;
+    this.leases$ = this.dataService.getLeases();
   }
 
-  onCancelBooking(offerId: string, slidingEl: IonItemSliding) {
-    slidingEl.close();
-    // cancel booking with id offerId
-  }
+  // onCancelBooking(offerId: string, slidingEl: IonItemSliding) {
+  //   slidingEl.close();
+  //   // cancel booking with id offerId
+  // }
 
-  get leaseId() {
-    return 1;
-  }
+  // get leaseId() {
+  //   return 1;
+  // }
 
 }
