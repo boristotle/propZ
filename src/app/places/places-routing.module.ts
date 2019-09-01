@@ -94,18 +94,18 @@ const routes: Routes = [
                         path: '',
                         loadChildren: './expenses/expenses.module#ExpensesPageModule'
                     },
+                    {
+                        path: 'new',
+                        loadChildren: './expenses/new-expense/new-expense.module#NewExpensePageModule'
+                    },
                     // {
-                    //     path: 'new',
-                    //     loadChildren: './expenses/new-tenant/new-tenant.module#NewTenantPageModule'
+                    //     path: 'edit/:expenseId',
+                    //     loadChildren: './expenses/edit-expense/edit-expense.module#EditExpensePageModule'
                     // },
-                    // {
-                    //     path: 'edit/:propertyId',
-                    //     loadChildren: './expenses/edit-lease/edit-lease.module#EditLeasePageModule'
-                    // },
-                    // {
-                    //     path: ':tenantId',
-                    //     loadChildren: './expenses/tenant-details/tenant-details.module#TenantDetailsPageModule'
-                    // }
+                    {
+                        path: ':expenseId',
+                        loadChildren: './expenses/expense-details/expense-details.module#ExpenseDetailsPageModule'
+                    }
                 ]
             }
         ]
