@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class PropertiesPage implements OnInit {
 
   constructor(private placesService: PlacesService, private router: Router) { }
-  properties$: Observable<Property[]>;
+  properties$: Observable<Property[] | {}>;
 
   ngOnInit() {
     this.properties$ = this.placesService.places;
@@ -22,7 +22,7 @@ export class PropertiesPage implements OnInit {
   onEdit(offerId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'places', 'tabs', 'properties', 'edit', offerId]);
-    console.log('Editing item', offerId);
+    // console.log('Editing item', offerId);
   }
 
 }

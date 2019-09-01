@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { PlacesService } from 'src/app/places/places.service';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-new-property',
@@ -14,6 +15,7 @@ export class NewPropertyPage implements OnInit {
 
   constructor(
     private placesService: PlacesService,
+    private dataService: DataService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
@@ -24,10 +26,10 @@ export class NewPropertyPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      description: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required, Validators.maxLength(180)]
-      }),
+      // description: new FormControl(null, {
+      //   updateOn: 'blur',
+      //   validators: [Validators.required, Validators.maxLength(180)]
+      // }),
       purchasePrice: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.min(1)]
@@ -65,17 +67,11 @@ export class NewPropertyPage implements OnInit {
     })
     .then(loadingEl => {
       loadingEl.present();
-      this.placesService
-        .addPlace(
-          this.form.value.address,
-          this.form.value.purchaseDate,
-          this.form.value.purchasePrice,
-          this.form.value.homeValue,
-          this.form.value.imageUrl,
-          this.form.value.mortgage,
-          this.form.value.insurance,
-          this.form.value.taxes
-        )
+      const property = { ...this.form.value };
+      property.purchaseDate = new Date(property.purchaseDate).toLocaleDateString();
+
+      this.dataService
+        .createProperty(property)
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();

@@ -5,6 +5,7 @@ import { PlacesService } from '../../places.service';
 import { Property } from '../../property.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-edit-property',
@@ -18,6 +19,7 @@ export class EditPropertyPage implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private dataService: DataService,
     private navCtrl: NavController,
     private placesService: PlacesService,
     private router: Router,
@@ -32,6 +34,7 @@ export class EditPropertyPage implements OnInit, OnDestroy {
       }
       this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(property => {
         this.property = property;
+
         this.form = new FormGroup({
           address: new FormControl(this.property.address, {
             updateOn: 'blur',
@@ -85,17 +88,11 @@ export class EditPropertyPage implements OnInit, OnDestroy {
        message: 'Updating property...'
     }).then(loadingEl => {
       loadingEl.present();
-      this.placesService.updatePlace(
-      this.property.id,
-      this.form.value.address,
-      this.form.value.purchaseDate,
-      this.form.value.purchasePrice,
-      this.form.value.homeValue,
-      this.form.value.imageUrl,
-      this.form.value.mortgage,
-      this.form.value.insurance,
-      this.form.value.taxes
-      ).subscribe(() => {
+      const property = { ...this.form.value, id: this.propertyId };
+      property.purchaseDate = new Date(property.purchaseDate).toLocaleDateString();
+
+      this.dataService
+        .updateProperty(property).subscribe(() => {
         loadingEl.dismiss();
         this.form.reset();
         this.router.navigate(['/places/tabs/properties']);

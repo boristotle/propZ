@@ -60,6 +60,14 @@
       <ion-card-header padding>
           <ion-card-subtitle text-center>Yearly Expenses</ion-card-subtitle>
       </ion-card-header>
+        <ion-item>
+            <ion-label>Income (YTD)</ion-label>
+            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Expenses (YTD)</ion-label>
+            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+        </ion-item>
       <ion-item>
           <ion-label>Mortgage</ion-label>
           <ion-text fill="outline" slot="end">{{ property.mortgage | currency:'USD' }}</ion-text>
@@ -72,24 +80,24 @@
           <ion-label>Insurance</ion-label>
           <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
       </ion-item>
-      <ion-card-header padding>
+      <ion-card-header padding *ngIf="property.Leases[0]">
           <ion-card-subtitle text-center>Current Lease</ion-card-subtitle>
       </ion-card-header>
-      <ion-item
+      <ion-item *ngIf="property.Leases[0]"
           [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
         <ion-label text-center>
-          <h2>Oct 12, 2019 - Oct 12, 2020</h2>
-          <p>$600 / month</p>
-          <p>Tenants: Bob Bobberson</p>
+          <h2>{{property.Leases[0].leaseStart}} to {{property.Leases[0].leaseEnd}}</h2>
+          <p>{{property.Leases[0].rentAmount | currency:'USD'}} / month</p>
+          <!-- <p>Tenants: Bob Bobberson</p>
           <p>Phone: (309) 429-0826</p>
-          <p>Email: boristotle@hotmail.com</p>
+          <p>Email: boristotle@hotmail.com</p> -->
         </ion-label>
       </ion-item>
       <ion-card-header padding>
-            <ion-card-subtitle text-center>Current Expenses ($5600)</ion-card-subtitle>
+            <ion-card-subtitle text-center>Expenses YTD ($5600)</ion-card-subtitle>
         </ion-card-header>
         <ion-item>
-            <ion-label>Expense 1</ion-label>
+            <ion-label>View Expenses</ion-label>
             <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
         </ion-item>
         <ion-item>

@@ -23,7 +23,23 @@
                         Add Document
                     </ion-item>
             </ion-item-sliding>
+            <ion-item-sliding>
+                    <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'edit', lease.id]">
+                        Edit Lease
+                    </ion-item>
+            </ion-item-sliding>
         </ion-list>
+        <!-- <ion-card-header padding>
+                <ion-card-subtitle text-center>Income / Expenses</ion-card-subtitle>
+            </ion-card-header>
+        <ion-item>
+            <ion-label>Income (YTD)</ion-label>
+            <ion-text fill="outline" slot="end">{{ lease.totalIncome }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Expenses (YTD)</ion-label>
+            <ion-text fill="outline" slot="end">{{ lease.totalExpenses }}</ion-text>
+        </ion-item> -->
     <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
     <ion-card-header padding>
         <ion-card-subtitle text-center>Details</ion-card-subtitle>

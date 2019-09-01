@@ -26,6 +26,7 @@ export class LeaseDetailsPage implements OnInit, OnDestroy {
         return;
       }
       this.leaseSub = this.leasesService.getLease(+paramMap.get('leaseId')).subscribe(lease => {
+        console.log('lease', lease);
         this.lease = lease;
       });
     });

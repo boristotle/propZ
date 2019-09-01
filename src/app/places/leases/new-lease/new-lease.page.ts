@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class NewLeasePage implements OnInit {
   form: FormGroup;
-  properties$: Observable<Property[]>;
+  properties$: Observable<Property[] | {}>;
 
   constructor(
     private leasesService: LeasesService,

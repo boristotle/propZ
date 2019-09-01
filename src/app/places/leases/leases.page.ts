@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data-service';
   styleUrls: ['./leases.page.scss'],
 })
 export class LeasesPage implements OnInit {
-  leases$: Observable<Lease[]>;
+  leases$: Observable<Lease[] | {}>;
 
   constructor(
     private leasesService: LeasesService,

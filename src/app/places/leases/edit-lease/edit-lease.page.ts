@@ -3,8 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
 import { LeasesService } from '../leases.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Lease } from '../leases.model';
+import { Property } from '../../property.model';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-edit-lease',
@@ -14,10 +16,12 @@ import { Lease } from '../leases.model';
 export class EditLeasePage implements OnInit, OnDestroy {
   form: FormGroup;
   lease: Lease;
+  properties$: Observable<Property[] | {}>;
   private leasesSub: Subscription;
 
   constructor(
     private leasesService: LeasesService,
+    private dataService: DataService,
     private router: Router,
     private loadingCtrl: LoadingController,
     private route: ActivatedRoute,
@@ -30,6 +34,9 @@ export class EditLeasePage implements OnInit, OnDestroy {
             this.navCtrl.navigateBack('/places/tabs/leases');
             return;
           }
+
+          this.properties$ = this.dataService.getProperties();
+
           this.leasesSub = this.leasesService.getLease(+paramMap.get('leaseId')).subscribe(lease => {
             this.lease = lease;
             this.form = new FormGroup({
@@ -37,11 +44,11 @@ export class EditLeasePage implements OnInit, OnDestroy {
                   updateOn: 'blur',
                   validators: [Validators.required]
                 }),
-                leaseStart: new FormControl(this.lease.leaseStart, {
+                leaseStart: new FormControl(new Date(this.lease.leaseStart), {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                leaseEnd: new FormControl(this.lease.leaseEnd, {
+                leaseEnd: new FormControl(new Date(this.lease.leaseEnd), {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
@@ -70,7 +77,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
         });
       }
 
-  onCreateLease() {
+  onEditLease() {
     if (!this.form.valid) {
       return;
     }

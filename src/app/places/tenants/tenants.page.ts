@@ -13,7 +13,7 @@ import { TenantsService } from './tenants.service';
 export class TenantsPage implements OnInit, OnDestroy {
 
   constructor(private tenantsService: TenantsService, private router: Router) { }
-  tenants$: Observable<Tenant[]>;
+  tenants$: Observable<Tenant[] | {}>;
 
   ngOnInit() {
     this.tenants$ = this.tenantsService.tenants;
