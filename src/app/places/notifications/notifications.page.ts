@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { SegmentChangeEventDetail } from '@ionic/core';
 import { Subscription, Observable } from 'rxjs';
@@ -12,8 +12,9 @@ import { map } from 'rxjs/operators';
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
-export class NotificationsPage implements OnInit, OnDestroy {
+export class NotificationsPage implements OnInit {
   notifications$: Observable<Notification[]>;
+  notificationCategories = ['late-rent', 'service-request', ''];
   private notificationsSub: Subscription;
 
   constructor(
@@ -24,6 +25,12 @@ export class NotificationsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.notifications$ = this.notificationsService.notifications;
+  }
+
+  filterByCategory(category) {
+    console.log('category', category);
+    // this.category = category;
+    // this.filteredExpenses = this.expenses.filter(e => e.category === category);
   }
 
   // onOpenMenu() {
@@ -40,9 +47,4 @@ export class NotificationsPage implements OnInit, OnDestroy {
   //  }
   // }
 
-  ngOnDestroy() {
-    if (this.notificationsSub) {
-      this.notificationsSub.unsubscribe();
-    }
-  }
 }

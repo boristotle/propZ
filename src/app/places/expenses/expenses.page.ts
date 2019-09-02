@@ -16,17 +16,36 @@ export class ExpensesPage implements OnInit {
 
   constructor(private dataService: DataService, private router: Router) { }
 
-  expenses$: Observable<Expense[] | {}>;
+  // expenses$: Observable<Expense[] | {}>;
+  category;
+  PropertyId;
+  expenses;
+  filteredExpenses;
   properties$: Observable<Property[] | {}>;
   expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
 
   ngOnInit() {
-    this.expenses$ = this.dataService.getExpenses();
+    this.dataService.getExpenses().subscribe((res: Expense[]) => {
+      this.expenses = res;
+      this.filteredExpenses = [...res];
+     });
+
     this.properties$ = this.dataService.getProperties();
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'places', 'tabs', 'expenses', 'edit', offerId]);
+  }
+
+  filterByCategory(category) {
+    console.log('category', category);
+    this.category = category;
+    this.filteredExpenses = this.expenses.filter(e => e.category === category);
+  }
+
+  filterByProperty(propertyId) {
+    console.log('propertyId', propertyId);
+    this.filteredExpenses = this.expenses.filter(e => e.PropertyId === propertyId);
   }
 }

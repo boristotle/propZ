@@ -14,11 +14,20 @@
         
         <ion-content>
         <ion-row>
+                <ion-col size-sm="12" offset-sm="0">
+                    <ion-item>
+                        <ion-label>Total</ion-label>
+                        <ion-text fill="outline" slot="end">{{ 99999 | currency:'USD' }}</ion-text>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+        <ion-row>
             <ion-col size-sm="12" offset-sm="0">
                 <ion-item>
                     <ion-label>Filter By Category</ion-label>
-                    <ion-select value="category" okText="Okay" cancelText="Dismiss">
-                    <ion-select-option *ngFor="let category of expenseCategories" [value]="category">{{category}}</ion-select-option>
+                    <ion-select [(ngModel)]="category" (ionChange)="filterByCategory(category)" okText="Okay" cancelText="Dismiss">
+                        <ion-select-option *ngFor="let category of expenseCategories" [value]="category">{{category}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
@@ -28,8 +37,8 @@
             <ion-col size-sm="12" offset-sm="0">
                 <ion-item>
                     <ion-label>Filter By Property</ion-label>
-                    <ion-select value="propertyId" okText="Okay" cancelText="Dismiss">
-                    <ion-select-option *ngFor="let property of (properties$ | async)" [value]="property.id">{{property.address}}</ion-select-option>
+                    <ion-select [(ngModel)]="propertyId" (ionChange)="filterByProperty(propertyId)" okText="Okay" cancelText="Dismiss">
+                        <ion-select-option *ngFor="let property of (properties$ | async)" [value]="property.id">{{property.address}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
@@ -39,7 +48,7 @@
             <ion-row>
             <ion-col size="12" size-sm="12" offset-sm="0">
                 <ion-list>
-                <ion-item-sliding *ngFor="let expense of (expenses$ | async)" #slidingItem>
+                <ion-item-sliding *ngFor="let expense of filteredExpenses" #slidingItem>
                     <ion-item  [routerLink]="['/', 'places', 'tabs', 'expenses', expense.id]">
                         <ion-label>
                             <h4>{{expense.amount | currency:'US'}}</h4>

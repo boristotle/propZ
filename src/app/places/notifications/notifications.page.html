@@ -11,7 +11,16 @@
 </ion-header>
 
 <ion-content>
-  ADD FILTER BY TYPE HERE
+  <ion-row>
+      <ion-col size-sm="12" offset-sm="0">
+          <ion-item>
+              <ion-label>Filter By Category</ion-label>
+              <ion-select [(ngModel)]="category" (ionChange)="filterByCategory(category)" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option *ngFor="let category of notificationCategories" [value]="category">{{category}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+      </ion-col>
+  </ion-row>
     <!-- <ion-segment (ionChange)="onFilterUpdate($event)">
       <ion-segment-button value="all" checked>All Places</ion-segment-button>
       <ion-segment-button value="bookable">Bookable Places</ion-segment-button>
