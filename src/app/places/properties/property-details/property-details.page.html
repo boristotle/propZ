@@ -23,12 +23,12 @@
               </ion-item>
             </ion-item-sliding>
             <ion-item-sliding>
-                <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'expense']">
+                <ion-item [routerLink]="['/', 'places', 'tabs', 'expenses', 'new']">
                     Add Expense
                 </ion-item>
               </ion-item-sliding>
               <ion-item-sliding>
-                <ion-item [routerLink]="['/', 'places', 'tabs', 'properties', 'document']">
+                <ion-item [routerLink]="['/', 'places', 'tabs', 'documents', 'new']">
                     Add Document
                 </ion-item>
               </ion-item-sliding>
@@ -80,10 +80,10 @@
           <ion-label>Insurance</ion-label>
           <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
       </ion-item>
-      <ion-card-header padding *ngIf="property.Leases[0]">
+      <ion-card-header padding *ngIf="property.Leases && property.Leases.length > 0">
           <ion-card-subtitle text-center>Current Lease</ion-card-subtitle>
       </ion-card-header>
-      <ion-item *ngIf="property.Leases[0]"
+      <ion-item *ngIf="property.Leases && property.Leases.length > 0"
           [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
         <ion-label text-center>
           <h2>{{property.Leases[0].leaseStart}} to {{property.Leases[0].leaseEnd}}</h2>
@@ -93,7 +93,7 @@
           <p>Email: boristotle@hotmail.com</p> -->
         </ion-label>
       </ion-item>
-      <ion-card-header padding>
+      <!-- <ion-card-header padding>
             <ion-card-subtitle text-center>Expenses YTD ($5600)</ion-card-subtitle>
         </ion-card-header>
         <ion-item>
@@ -103,6 +103,6 @@
         <ion-item>
             <ion-label>Expense 2</ion-label>
             <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
-        </ion-item>
+        </ion-item> -->
   </ion-card>
 </ion-content>
