@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
 import { Tenant } from './tenants.model';
 import { TenantsService } from './tenants.service';
 
@@ -10,22 +9,22 @@ import { TenantsService } from './tenants.service';
   templateUrl: './tenants.page.html',
   styleUrls: ['./tenants.page.scss'],
 })
-export class TenantsPage implements OnInit, OnDestroy {
+export class TenantsPage implements OnInit {
 
   constructor(private tenantsService: TenantsService, private router: Router) { }
-  tenants$: Observable<Tenant[] | {}>;
+  tenants: Tenant[] = [];
 
   ngOnInit() {
-    this.tenants$ = this.tenantsService.tenants;
+    this.tenantsService.tenants.subscribe((res: Tenant[]) => {
+      this.tenants = res;
+    }, err => {
+      console.log('err', err);
+    });
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'places', 'tabs', 'tenants', 'edit', offerId]);
-    console.log('Editing item', offerId);
   }
 
-  ngOnDestroy() {
-
-  }
 }

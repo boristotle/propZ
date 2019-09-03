@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class NewExpensePage implements OnInit {
   form: FormGroup;
   properties$: Observable<Property[] | {}>;
+  expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
 
   constructor(
     private placesService: PlacesService,
@@ -64,7 +65,7 @@ export class NewExpensePage implements OnInit {
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();
-          this.router.navigate(['/places/tabs/expense']);
+          this.router.navigate(['/places/tabs/expenses']);
         });
     });
 

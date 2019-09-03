@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { TenantsService } from '../tenants.service';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-new-tenant',
@@ -13,7 +13,7 @@ export class NewTenantPage implements OnInit {
   form: FormGroup;
 
   constructor(
-    private tenantsService: TenantsService,
+    private dataService: DataService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
@@ -47,7 +47,7 @@ export class NewTenantPage implements OnInit {
     });
   }
 
-  onCreateTenant() {
+    onCreateTenant() {
     if (!this.form.valid) {
       return;
     }
@@ -57,22 +57,17 @@ export class NewTenantPage implements OnInit {
     })
     .then(loadingEl => {
       loadingEl.present();
-      this.tenantsService
-        .addTenant(
-          this.form.value.name,
-          this.form.value.phone,
-          this.form.value.email,
-          this.form.value.SSN,
-          this.form.value.DOB,
-          this.form.value.DL,
-        )
+      const tenant = { ...this.form.value };
+      tenant.DOB = new Date(tenant.DOB).toLocaleDateString();
+
+      this.dataService
+        .createTenant(tenant)
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();
           this.router.navigate(['/places/tabs/tenants']);
         });
     });
-
   }
 
 }

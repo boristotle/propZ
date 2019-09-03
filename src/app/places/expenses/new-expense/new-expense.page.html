@@ -52,9 +52,11 @@
         </ion-row>
         <ion-row>
                 <ion-col size-sm="12" offset-sm="0">
-                    <ion-item>
-                    <ion-label position="floating">Category</ion-label>
-                        <ion-input type="number" formControlName="category"></ion-input>
+                <ion-item>
+                    <ion-label>Category</ion-label>
+                    <ion-select value="category" okText="Okay" cancelText="Dismiss">
+                        <ion-select-option *ngFor="let category of expenseCategories" [value]="category">{{category}}</ion-select-option>
+                    </ion-select>
                     </ion-item>
                 </ion-col>
             </ion-row>

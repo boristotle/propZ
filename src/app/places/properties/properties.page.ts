@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PlacesService } from '../places.service';
-import { Property } from '../property.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data-service';
+import { Property } from '../property.model';
 
 @Component({
   selector: 'app-properties',
@@ -12,17 +11,26 @@ import { Observable } from 'rxjs';
 })
 export class PropertiesPage implements OnInit {
 
-  constructor(private placesService: PlacesService, private router: Router) { }
-  properties$: Observable<Property[] | {}>;
+  constructor(private dataService: DataService, private router: Router) { }
+  properties: Property[] = [];
+  filteredProperties: Property[] = [];
 
   ngOnInit() {
-    this.properties$ = this.placesService.places;
+    this.dataService.getProperties().subscribe((res: Property[]) => {
+      this.properties = res;
+      this.filteredProperties = [...res];
+    }, err => {
+      console.log('err', err);
+    });
+  }
+
+  filterProperties(event) {
+    this.filteredProperties = this.properties.filter(p => p.address.includes(event.detail.value));
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'places', 'tabs', 'properties', 'edit', offerId]);
-    // console.log('Editing item', offerId);
   }
 
 }

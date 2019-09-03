@@ -5,6 +5,7 @@ import { Property } from '../places/property.model';
 import { Lease } from '../places/leases/leases.model';
 import { Observable } from 'rxjs';
 import { Expense } from '../places/expenses/expenses.model';
+import { Tenant } from '../places/tenants/tenants.model';
 
 @Injectable()
 export class DataService {
@@ -13,6 +14,13 @@ export class DataService {
     // LEASES
     getLeases() {
         return this.http.get('http://localhost:3000/api/leases').pipe(
+            catchError(err => err)
+        );
+    }
+
+    createLease(lease: Lease) {
+        return this.http.post('http://localhost:3000/api/leases', lease).pipe(
+            map(res => res),
             catchError(err => err)
         );
     }
@@ -44,6 +52,13 @@ export class DataService {
 
     getTenants() {
         return this.http.get('http://localhost:3000/api/tenants').pipe(
+            catchError(err => err)
+        );
+    }
+
+    createTenant(tenant: Tenant) {
+        return this.http.post('http://localhost:3000/api/tenants', tenant).pipe(
+            map(res => res),
             catchError(err => err)
         );
     }

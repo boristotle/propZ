@@ -29,7 +29,6 @@ export class ExpenseDetailsPage implements OnInit {
       }
 
       const expenseId = +paramMap.get('expenseId');
-      console.log('expenseId', expenseId);
       // this.expense$ = this.dataService.getExpense(expenseId);
       this.expense$ = this.dataService.getExpense(expenseId);
     });

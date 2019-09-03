@@ -6,6 +6,7 @@ import { LeasesService } from '../leases.service';
 import { Property } from '../../property.model';
 import { PlacesService } from '../../places.service';
 import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-new-lease',
@@ -14,17 +15,21 @@ import { Observable } from 'rxjs';
 })
 export class NewLeasePage implements OnInit {
   form: FormGroup;
-  properties$: Observable<Property[] | {}>;
+  properties: Property[] = [];
 
   constructor(
-    private leasesService: LeasesService,
+    private dataService: DataService,
     private placesService: PlacesService,
     private router: Router,
     private loadingCtrl: LoadingController,
     ) { }
 
   ngOnInit() {
-    this.properties$ = this.placesService.places;
+    this.dataService.getProperties().subscribe((res: Property[]) => {
+      this.properties = res;
+    }, err => {
+      console.log('err', err);
+    });
 
     this.form = new FormGroup({
       PropertyId: new FormControl(null, {
@@ -72,23 +77,17 @@ export class NewLeasePage implements OnInit {
     })
     .then(loadingEl => {
       loadingEl.present();
-      this.leasesService
-        .addLease(
-        this.form.value.leaseStart,
-        this.form.value.leaseEnd,
-        this.form.value.deposit,
-        this.form.value.rentAmount,
-        this.form.value.rentDue,
-        this.form.value.lateFee,
-        this.form.value.lateDays,
-        this.form.value.PropertyId,
+      const lease = { ...this.form.value };
+      lease.leaseStart = new Date(lease.leaseStart).toLocaleDateString();
+      lease.leaseEnd = new Date(lease.leaseEnd).toLocaleDateString();
 
-        )
+      this.dataService
+        .createLease(lease)
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();
           this.router.navigate(['/places/tabs/leases']);
-      });
+        });
     });
 
   }

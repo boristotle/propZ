@@ -30,7 +30,6 @@ export class NotificationDetailsPage implements OnInit, OnDestroy {
       }
       this.placeSub = this.placesService.getPlace(+paramMap.get('propertyId')).subscribe(place => {
         this.place = place;
-        console.log(this.place);
       });
 
     });

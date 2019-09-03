@@ -28,7 +28,6 @@ export class NotificationsPage implements OnInit {
   }
 
   filterByCategory(category) {
-    console.log('category', category);
     // this.category = category;
     // this.filteredExpenses = this.expenses.filter(e => e.category === category);
   }

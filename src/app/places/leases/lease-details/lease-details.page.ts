@@ -22,11 +22,10 @@ export class LeaseDetailsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
       if (!paramMap.has('leaseId')) {
-        this.navCtrl.navigateBack('/places/tabs/properties');
+        this.navCtrl.navigateBack('/places/tabs/leases');
         return;
       }
       this.leaseSub = this.leasesService.getLease(+paramMap.get('leaseId')).subscribe(lease => {
-        console.log('lease', lease);
         this.lease = lease;
       });
     });
