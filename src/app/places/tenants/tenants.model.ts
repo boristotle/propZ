@@ -7,5 +7,6 @@ export class Tenant {
         public DOB: string,
         public DL: string,
         public id?: number,
+        public LeaseId?: number,
         ) {}
 }

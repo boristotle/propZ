@@ -89,7 +89,6 @@ export class EditPropertyPage implements OnInit, OnDestroy {
     }).then(loadingEl => {
       loadingEl.present();
       const property = { ...this.form.value, id: this.propertyId };
-      property.purchaseDate = new Date(property.purchaseDate).toLocaleDateString();
 
       this.dataService
         .updateProperty(property).subscribe(() => {

@@ -3,6 +3,7 @@ import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Tenant } from './tenants.model';
 import { TenantsService } from './tenants.service';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-tenants',
@@ -11,11 +12,11 @@ import { TenantsService } from './tenants.service';
 })
 export class TenantsPage implements OnInit {
 
-  constructor(private tenantsService: TenantsService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router) { }
   tenants: Tenant[] = [];
 
   ngOnInit() {
-    this.tenantsService.tenants.subscribe((res: Tenant[]) => {
+    this.dataService.getTenants().subscribe((res: Tenant[]) => {
       this.tenants = res;
     }, err => {
       console.log('err', err);

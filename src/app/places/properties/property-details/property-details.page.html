@@ -47,32 +47,60 @@
         <ion-card-subtitle text-center>Property Details</ion-card-subtitle>
       </ion-card-header>
       <ion-item>
+            <ion-label>Home Value</ion-label>
+            <ion-text fill="outline" slot="end">{{ property.homeValue | currency:'USD' }}</ion-text>
+        </ion-item>
+      <ion-item>
           <ion-label>Purchase Price</ion-label>
           <ion-text fill="outline" slot="end">{{ property.purchasePrice | currency:'USD' }}</ion-text>
       </ion-item>
       <ion-item>
-          <ion-label>Home Value</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.homeValue | currency:'USD' }}</ion-text>
-      </ion-item>
+            <ion-label>Mortgage Debt</ion-label>
+            <ion-text fill="outline" slot="end">{{ property.mortgageDebt | currency:'USD' }}</ion-text>
+        </ion-item>
       <ion-item>
           <ion-label>Purchase Date</ion-label>
-          <ion-text fill="outline" slot="end">{{ property.purchaseDate }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ property.purchaseDate | date }}</ion-text>
       </ion-item>
       <ion-item>
           <ion-label>Current Equity</ion-label>
-          <ion-text fill="outline" slot="end">{{ (property.homeValue - property.purchasePrice) | currency:'USD' }}</ion-text>
+          <ion-text fill="outline" slot="end">{{ (property.homeValue - property.mortgageDebt) | currency:'USD' }}</ion-text>
       </ion-item>
+      <ion-card-header padding>
+            <ion-card-subtitle text-center>Profit & Loss (YTD)</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Revenue</ion-label>
+            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Expenses</ion-label>
+            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Profit</ion-label>
+            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+        </ion-item>
+
+        <!-- <ion-card-header padding>
+            <ion-card-subtitle text-center>Monthly P & L</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+                <ion-label>Monthly Revenue</ion-label>
+                <ion-text fill="outline" slot="end"> {{totalMonthlyIncome | currency:'USD'}}</ion-text>
+            </ion-item>
+            <ion-item>
+                <ion-label>Monthly Expenses</ion-label>
+                <ion-text fill="outline" slot="end"> {{totalMonthlyExpenses | currency:'USD'}}</ion-text>
+            </ion-item>
+            <ion-item>
+                <ion-label>Monthly Profit</ion-label>
+                <ion-text fill="outline" slot="end"> {{(totalMonthlyIncome - totalMonthlyExpenses) | currency:'USD'}}</ion-text>
+            </ion-item> -->
+
       <ion-card-header padding>
           <ion-card-subtitle text-center>Yearly Expenses</ion-card-subtitle>
       </ion-card-header>
-        <ion-item>
-            <ion-label>Income (YTD)</ion-label>
-            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
-        </ion-item>
-        <ion-item>
-            <ion-label>Expenses (YTD)</ion-label>
-            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
-        </ion-item>
       <ion-item>
           <ion-label>Mortgage</ion-label>
           <ion-text fill="outline" slot="end">{{ property.mortgage | currency:'USD' }}</ion-text>
@@ -91,13 +119,17 @@
       <ion-item *ngIf="property.Leases && property.Leases.length > 0"
           [routerLink]="['/', 'places', 'tabs', 'leases', leaseId ]" detail >
         <ion-label text-center>
-          <h2>{{property.Leases[0].leaseStart}} to {{property.Leases[0].leaseEnd}}</h2>
-          <p>{{property.Leases[0].rentAmount | currency:'USD'}} / month</p>
+          <h2>{{property.Leases[0].leaseStart | date}} to {{property.Leases[0].leaseEnd | date}}</h2>
+          <p>{{property.Leases[0].rentAmountDue | currency:'USD'}} / month</p>
+          <p>Next payment due in {{ property.Leases[0].LeasePayments[0].daysUntilNextPaymentDue }} days</p>
+          <p *ngIf="property.Leases[0].LeasePayments[0].daysPastDue">Payment is {{ property.Leases[0].LeasePayments[0].daysPastDue }} days late</p>
+          <p>Lease ends in {{property.Leases[0].daysUntilLeaseEnd}} days</p>
           <!-- <p>Tenants: Bob Bobberson</p>
           <p>Phone: (309) 429-0826</p>
           <p>Email: boristotle@hotmail.com</p> -->
         </ion-label>
       </ion-item>
+
       <!-- <ion-card-header padding>
             <ion-card-subtitle text-center>Expenses YTD ($5600)</ion-card-subtitle>
         </ion-card-header>
@@ -109,5 +141,6 @@
             <ion-label>Expense 2</ion-label>
             <ion-text fill="outline" slot="end">{{ property.insurance | currency:'USD' }}</ion-text>
         </ion-item> -->
+
   </ion-card>
 </ion-content>

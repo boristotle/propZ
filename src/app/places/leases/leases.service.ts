@@ -30,18 +30,18 @@ export class LeasesService {
     leaseEnd: string,
     rentDue: number,
     deposit: number,
-    rentAmount: number,
-    lateFee: number,
-    lateDays: number,
+    rentAmountDue: number,
+    dailyLateFee: number,
+    lateDaysAllowed: number,
     PropertyId: number) {
     const newLease = new Lease(
         leaseStart,
         leaseEnd,
         rentDue,
         deposit,
-        rentAmount,
-        lateFee,
-        lateDays,
+        rentAmountDue,
+        dailyLateFee,
+        lateDaysAllowed,
         PropertyId
       );
 
@@ -60,9 +60,9 @@ export class LeasesService {
     leaseEnd: string,
     rentDue: number,
     deposit: number,
-    rentAmount: number,
-    lateFee: number,
-    lateDays: number,
+    rentAmountDue: number,
+    dailyLateFee: number,
+    lateDaysAllowed: number,
     leaseId: number,
     PropertyId: number
     ) {
@@ -78,9 +78,9 @@ export class LeasesService {
         leaseEnd,
         rentDue,
         deposit,
-        rentAmount,
-        lateFee,
-        lateDays,
+        rentAmountDue,
+        dailyLateFee,
+        lateDaysAllowed,
         oldLease.id,
         PropertyId
         );

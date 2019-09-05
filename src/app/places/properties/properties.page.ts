@@ -24,6 +24,42 @@ export class PropertiesPage implements OnInit {
     });
   }
 
+  get totalMonthlyIncome() {
+    if (this.properties) {
+      return this.properties.reduce((acc, prop) => {
+        return acc + prop.Leases[0].rentAmountDue;
+      }, 0);
+    }
+    return 0;
+  }
+
+  get totalMonthlyExpenses() {
+    if (this.properties) {
+      return this.properties.reduce((acc, prop) => {
+        return acc + ((prop.mortgage + prop.insurance + prop.taxes) / 12);
+      }, 0);
+    }
+    return 0;
+  }
+
+  get totalEquity() {
+    if (this.properties) {
+      return this.properties.reduce((acc, prop) => {
+        return acc + (prop.homeValue - prop.purchasePrice);
+      }, 0);
+    }
+    return 0;
+  }
+
+  get totalMortgageDebt() {
+    if (this.properties) {
+      return this.properties.reduce((acc, prop) => {
+        return acc + prop.mortgageDebt;
+      }, 0);
+    }
+    return 0;
+  }
+
   filterProperties(event) {
     this.filteredProperties = this.properties.filter(p => p.address.includes(event.detail.value));
   }

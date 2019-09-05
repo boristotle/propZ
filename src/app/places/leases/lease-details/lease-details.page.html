@@ -29,18 +29,6 @@
                     </ion-item>
             </ion-item-sliding>
         </ion-list>
-        <!-- <ion-card-header padding>
-                <ion-card-subtitle text-center>Income / Expenses</ion-card-subtitle>
-            </ion-card-header>
-        <ion-item>
-            <ion-label>Income (YTD)</ion-label>
-            <ion-text fill="outline" slot="end">{{ lease.totalIncome }}</ion-text>
-        </ion-item>
-        <ion-item>
-            <ion-label>Expenses (YTD)</ion-label>
-            <ion-text fill="outline" slot="end">{{ lease.totalExpenses }}</ion-text>
-        </ion-item> -->
-    <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
     <ion-card-header padding>
         <ion-card-subtitle text-center>Lease Details</ion-card-subtitle>
     </ion-card-header>
@@ -50,31 +38,49 @@
     </ion-item>
     <ion-item>
         <ion-label>Lease Start</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.leaseStart }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.leaseStart | date }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Lease End</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.leaseEnd }}</ion-text>
+        <ion-text fill="outline" slot="end">{{ lease.leaseEnd | date }}</ion-text>
     </ion-item>
     <ion-item>
-        <ion-label>Rent Due (day)</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.rentDue }}</ion-text>
+        <ion-label>Rent Due Day</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.rentDueDay }}</ion-text>
     </ion-item>
     <ion-item>
         <ion-label>Deposit</ion-label>
         <ion-text fill="outline" slot="end">{{ lease.deposit | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
-        <ion-label>Rent Amount</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.rentAmount | currency:'USD' }}</ion-text>
+        <ion-label>Rent Amount Due</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.rentAmountDue | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
-        <ion-label>Late Fee</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.lateFee | currency:'USD' }}</ion-text>
+        <ion-label>Daily Late Fee</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.dailyLateFee | currency:'USD' }}</ion-text>
     </ion-item>
     <ion-item>
-        <ion-label>Late Days</ion-label>
-        <ion-text fill="outline" slot="end">{{ lease.lateDays }}</ion-text>
+        <ion-label>Late Days Allowed</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.lateDaysAllowed }}</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.status }}</ion-text>
+        [TODO:  Archive / Unarchive Lease HERE ]
+        <!-- <ion-button margin color="primary" [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">{{ archive }}</ion-button> -->
+    </ion-item>
+    <ion-item>
+        <ion-label>Next Payment Due</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.LeasePayments[0].daysUntilNextPaymentDue }} days</ion-text>
+    </ion-item>
+    <ion-item *ngIf="lease.LeasePayments[0].daysPastDue">
+        <ion-label>Days Past Due</ion-label>
+        <ion-text fill="outline" slot="end">{{ lease.LeasePayments[0].daysPastDue }} days</ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label>Lease Ends</ion-label>
+        <ion-text fill="outline" slot="end"> {{lease.daysUntilLeaseEnd}} days</ion-text>
     </ion-item>
 </ion-card>
 </ion-content>

@@ -44,11 +44,11 @@ export class EditLeasePage implements OnInit, OnDestroy {
                   updateOn: 'blur',
                   validators: [Validators.required]
                 }),
-                leaseStart: new FormControl(new Date(this.lease.leaseStart), {
+                leaseStart: new FormControl(this.lease.leaseStart, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                leaseEnd: new FormControl(new Date(this.lease.leaseEnd), {
+                leaseEnd: new FormControl(this.lease.leaseEnd, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
@@ -56,11 +56,11 @@ export class EditLeasePage implements OnInit, OnDestroy {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                lateDays: new FormControl(this.lease.lateDays, {
+                lateDaysAllowed: new FormControl(this.lease.lateDaysAllowed, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                lateFee: new FormControl(this.lease.lateFee, {
+                dailyLateFee: new FormControl(this.lease.dailyLateFee, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
@@ -68,7 +68,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                rentAmount: new FormControl(this.lease.rentAmount, {
+                rentAmountDue: new FormControl(this.lease.rentAmountDue, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 })
@@ -93,10 +93,10 @@ export class EditLeasePage implements OnInit, OnDestroy {
         this.form.value.leaseStart,
         this.form.value.leaseEnd,
         this.form.value.deposit,
-        this.form.value.rentAmount,
+        this.form.value.rentAmountDue,
         this.form.value.rentDue,
-        this.form.value.lateFee,
-        this.form.value.lateDays
+        this.form.value.dailyLateFee,
+        this.form.value.lateDaysAllowed
         )
         .subscribe(() => {
           loadingEl.dismiss();

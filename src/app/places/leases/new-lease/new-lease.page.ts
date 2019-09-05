@@ -48,11 +48,11 @@ export class NewLeasePage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      lateDays: new FormControl(null, {
+      lateDaysAllowed: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      lateFee: new FormControl(null, {
+      dailyLateFee: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),
@@ -60,7 +60,7 @@ export class NewLeasePage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      rentAmount: new FormControl(null, {
+      rentAmountDue: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       })
@@ -78,8 +78,6 @@ export class NewLeasePage implements OnInit {
     .then(loadingEl => {
       loadingEl.present();
       const lease = { ...this.form.value };
-      lease.leaseStart = new Date(lease.leaseStart).toLocaleDateString();
-      lease.leaseEnd = new Date(lease.leaseEnd).toLocaleDateString();
 
       this.dataService
         .createLease(lease)

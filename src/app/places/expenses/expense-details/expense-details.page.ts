@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Subscription, Observable } from 'rxjs';
 import { Expense } from '../expenses.model';
-import { LeasesService } from '../../leases/leases.service';
 import { DataService } from 'src/app/services/data-service';
-import { filter, take, first } from 'rxjs/operators';
+import { Property } from '../../property.model';
 
 @Component({
   selector: 'app-expense-details',
@@ -13,8 +11,7 @@ import { filter, take, first } from 'rxjs/operators';
   styleUrls: ['./expense-details.page.scss'],
 })
 export class ExpenseDetailsPage implements OnInit {
-  expense$: Observable<Expense[] | {}>;
-  private leaseSub: Subscription;
+  expense: Expense;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,19 +27,17 @@ export class ExpenseDetailsPage implements OnInit {
 
       const expenseId = +paramMap.get('expenseId');
       // this.expense$ = this.dataService.getExpense(expenseId);
-      this.expense$ = this.dataService.getExpense(expenseId);
+      this.dataService.getExpense(expenseId).subscribe((res: Expense) => {
+        this.expense = res;
+      }, err => {
+        console.log('err', err);
+      });
     });
-  }
 
+  }
   // get expenseId() {
   //   if (this.expense) {
   //     return this.expense.id;
-  //   }
-  // }
-
-  // ngOnDestroy() {
-  //   if (this.leaseSub) {
-  //     this.leaseSub.unsubscribe();
   //   }
   // }
 

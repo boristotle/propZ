@@ -3,61 +3,27 @@
         <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/expenses"></ion-back-button>
         </ion-buttons>
-        <ion-title>Expense for {{(expense$ | async)?.PropertyId}}</ion-title>
+        <ion-title *ngIf="expense">Expense for {{expense.Property.address}}</ion-title>
     </ion-toolbar>
 </ion-header>
                             
-    <ion-content>
-    <ion-card>
-        <!-- <ion-list>
-                <ion-item-sliding>
-                    <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'expense']">
-                        Add Expense
-                    </ion-item>
-                    </ion-item-sliding>
-                    <ion-item-sliding>
-                        <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'document']">
-                            Add Document
-                        </ion-item>
-                </ion-item-sliding>
-                <ion-item-sliding>
-                        <ion-item [routerLink]="['/', 'places', 'tabs', 'leases', 'edit', lease.id]">
-                            Edit Lease
-                        </ion-item>
-                </ion-item-sliding>
-            </ion-list> -->
-
-            <!-- <ion-card-header padding>
-                    <ion-card-subtitle text-center>Income / Expenses</ion-card-subtitle>
-                </ion-card-header>
-            <ion-item>
-                <ion-label>Income (YTD)</ion-label>
-                <ion-text fill="outline" slot="end">{{ lease.totalIncome }}</ion-text>
-            </ion-item>
-            <ion-item>
-                <ion-label>Expenses (YTD)</ion-label>
-                <ion-text fill="outline" slot="end">{{ lease.totalExpenses }}</ion-text>
-            </ion-item> -->
-        <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
-        
-        <!-- <ion-card-header padding>
-            <ion-card-subtitle text-center>Details</ion-card-subtitle>
-        </ion-card-header> -->
+<ion-content>
+    <ion-card *ngIf="expense">
         <ion-item>
             <ion-label>Address</ion-label>
-            <ion-text fill="outline" slot="end">{{ (expense$ | async)?.PropertyId }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ expense.Property.address }}</ion-text>
         </ion-item>
         <ion-item>
             <ion-label>Date</ion-label>
-            <ion-text fill="outline" slot="end">{{ (expense$ | async)?.date }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ expense.date }}</ion-text>
         </ion-item>
         <ion-item>
             <ion-label>Amount</ion-label>
-            <ion-text fill="outline" slot="end">{{ (expense$ | async)?.amount | currency:'USD' }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ expense.amount | currency:'USD' }}</ion-text>
         </ion-item>
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-text fill="outline" slot="end">{{ (expense$ | async)?.category }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ expense.category }}</ion-text>
         </ion-item>
     </ion-card>
 </ion-content>

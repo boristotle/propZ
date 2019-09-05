@@ -58,7 +58,6 @@ export class NewExpensePage implements OnInit {
     .then(loadingEl => {
       loadingEl.present();
       const expense = { ...this.form.value };
-      expense.date = new Date(expense.date).toLocaleDateString();
 
       this.dataService
         .createExpense(expense)

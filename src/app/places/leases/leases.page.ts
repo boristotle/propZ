@@ -12,14 +12,17 @@ import { DataService } from 'src/app/services/data-service';
   styleUrls: ['./leases.page.scss'],
 })
 export class LeasesPage implements OnInit {
-  leases$: Observable<Lease[] | {}>;
+  leases: Lease[] = [];
 
   constructor(
     private leasesService: LeasesService,
     private dataService: DataService) { }
 
   ngOnInit() {
-    this.leases$ = this.dataService.getLeases();
+    this.dataService.getLeases().subscribe((res: Lease[]) => {
+      console.log('this.leases', this.leases);
+      this.leases = res;
+    });
   }
 
   // onCancelBooking(offerId: string, slidingEl: IonItemSliding) {

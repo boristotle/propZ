@@ -68,7 +68,6 @@ export class NewPropertyPage implements OnInit {
     .then(loadingEl => {
       loadingEl.present();
       const property = { ...this.form.value };
-      property.purchaseDate = new Date(property.purchaseDate).toLocaleDateString();
 
       this.dataService
         .createProperty(property)

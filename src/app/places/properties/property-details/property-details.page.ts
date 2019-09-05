@@ -37,6 +37,26 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
     }
   }
 
+
+  // get totalMonthlyIncome() {
+  //   if (this.properties) {
+  //     return this.properties.reduce((acc, prop) => {
+  //       return acc + prop.Leases[0].rentAmountDue;
+  //     }, 0);
+  //   }
+  //   return 0;
+  // }
+
+  // get totalMonthlyExpenses() {
+  //   if (this.properties) {
+  //     return this.properties.reduce((acc, prop) => {
+  //       console.log('prop', prop);
+  //       return acc + ((prop.mortgage + prop.insurance + prop.taxes) / 12);
+  //     }, 0);
+  //   }
+  //   return 0;
+  // }
+
   get leaseId() {
     if (this.property && this.property.Leases) {
       return this.property.Leases[0].id;

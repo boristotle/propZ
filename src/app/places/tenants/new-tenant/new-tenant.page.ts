@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data-service';
+import { Lease } from '../../leases/leases.model';
 
 @Component({
   selector: 'app-new-tenant',
@@ -11,6 +12,7 @@ import { DataService } from 'src/app/services/data-service';
 })
 export class NewTenantPage implements OnInit {
   form: FormGroup;
+  leases: Lease[] = [];
 
   constructor(
     private dataService: DataService,
@@ -19,10 +21,19 @@ export class NewTenantPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.dataService.getLeases().subscribe((res: Lease[]) => {
+      this.leases = res;
+      console.log('this.leases', this.leases);
+    });
+
     this.form = new FormGroup({
       name: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      LeaseId: new FormControl(null, {
+        updateOn: 'blur',
+        validators: []
       }),
       phone: new FormControl(null, {
         updateOn: 'blur',
@@ -58,7 +69,7 @@ export class NewTenantPage implements OnInit {
     .then(loadingEl => {
       loadingEl.present();
       const tenant = { ...this.form.value };
-      tenant.DOB = new Date(tenant.DOB).toLocaleDateString();
+      console.log('tenant', tenant);
 
       this.dataService
         .createTenant(tenant)
