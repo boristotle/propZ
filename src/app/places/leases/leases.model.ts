@@ -1,3 +1,5 @@
+import { Property } from '../property.model';
+
 export class Lease {
     constructor(
         public leaseStart: string,
@@ -9,5 +11,6 @@ export class Lease {
         public lateDaysAllowed: number,
         public id?: number,
         public PropertyId?: number,
+        public Property?: Property,
     ) {}
 }

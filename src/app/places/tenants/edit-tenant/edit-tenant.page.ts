@@ -17,6 +17,7 @@ export class EditTenantPage implements OnInit {
   form: FormGroup;
   tenant: Tenant;
   leases: Lease[] = [];
+  selectedLease: Lease;
 
   constructor(
     private dataService: DataService,
@@ -29,9 +30,9 @@ export class EditTenantPage implements OnInit {
 
     ngOnInit() {
         this.dataService.getLeases().subscribe((res: Lease[]) => {
-                this.leases = res;
-                console.log('this.leases', this.leases);
-            });
+            this.leases = res;
+            console.log('this.leases', this.leases);
+        });
 
         this.route.paramMap.subscribe(paramMap => {
             if (!paramMap.has('tenantId')) {
@@ -75,6 +76,22 @@ export class EditTenantPage implements OnInit {
         });
     }
 
+    get selectedLeaseText() {
+        if (this.leases && this.tenant) {
+            return this.leases.find(l => l.id === this.tenant.LeaseId).Property.address;
+        }
+    }
+
+    selectLease(event) {
+        // console.log('event', event.detail.value);
+        this.tenant.LeaseId = event.detail.value;
+    }
+
+    get tenantId() {
+        if (this.tenant) {
+          return this.tenant.id;
+        }
+      }
 
     onEditTenant() {
     if (!this.form.valid) {
@@ -86,7 +103,7 @@ export class EditTenantPage implements OnInit {
     })
     .then(loadingEl => {
       loadingEl.present();
-      const tenant = { ...this.form.value };
+      const tenant = { ...this.form.value, id: this.tenantId };
 
       this.dataService
         .updateTenant(tenant)

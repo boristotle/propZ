@@ -26,8 +26,8 @@
                     <ion-col size-sm="12" offset-sm="0">
                         <ion-item *ngIf="leases && tenant">
                             <ion-label>Assign To Lease</ion-label>
-                            <ion-select value="LeaseId" formControlName="LeaseId" okText="Okay" cancelText="Dismiss">
-                            <ion-select-option *ngFor="let lease of leases" [value]="lease.id">{{lease.Property.address}}</ion-select-option>
+                            <ion-select (ionChange)="selectLease($event)" [selectedText]="selectedLeaseText" value="LeaseId" formControlName="LeaseId" okText="Okay" cancelText="Dismiss">
+                            <ion-select-option *ngFor="let lease of leases" [selected]="tenant.LeaseId === lease.id" [value]="lease.id">{{lease.Property.address}}</ion-select-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
