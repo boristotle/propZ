@@ -28,58 +28,58 @@ export class TenantsService {
     }));
   }
 
-  addTenant(
-    name: string,
-    phone: string,
-    email: string,
-    SSN: string,
-    DOB: string,
-    DL: string) {
-    const newTenant = new Tenant(
-        name,
-        phone,
-        email,
-        SSN,
-        DOB,
-        DL,
-      );
+  // addTenant(
+  //   name: string,
+  //   phone: string,
+  //   email: string,
+  //   SSN: string,
+  //   DOB: string,
+  //   DL: string) {
+  //   const newTenant = new Tenant(
+  //       name,
+  //       phone,
+  //       email,
+  //       SSN,
+  //       DOB,
+  //       DL,
+  //     );
 
-    return this._tenants.pipe(
-      take(1),
-      delay(1000),
-      tap(places => {
-      setTimeout(() => {
-        // this._tenants.next(places.concat(newTenant));
-     }, 1000);
-    }));
-  }
+  //   return this._tenants.pipe(
+  //     take(1),
+  //     delay(1000),
+  //     tap(places => {
+  //     setTimeout(() => {
+  //       // this._tenants.next(places.concat(newTenant));
+  //    }, 1000);
+  //   }));
+  // }
 
-  updateTenant(
-    tenantId: number,
-    name: string,
-    phone: string,
-    email: string,
-    SSN: string,
-    DOB: string,
-    DL: string
-    ) {
-    return this.tenants.pipe(
-      take(1),
-      delay(1000),
-      tap((tenants: Tenant[]) => {
-      const updatedTenantIndex = tenants.findIndex(pl => pl.id === tenantId);
-      const updatedTenants = [...tenants];
-      const oldTenant = updatedTenants[updatedTenantIndex];
-      updatedTenants[updatedTenantIndex] = new Tenant(
-        name,
-        phone,
-        email,
-        SSN,
-        DOB,
-        DL,
-        oldTenant.id
-        );
-      // this._tenants.next(updatedTenants);
-    }));
-  }
+  // updateTenant(
+  //   tenantId: number,
+  //   name: string,
+  //   phone: string,
+  //   email: string,
+  //   SSN: string,
+  //   DOB: string,
+  //   DL: string
+  //   ) {
+  //   return this.tenants.pipe(
+  //     take(1),
+  //     delay(1000),
+  //     tap((tenants: Tenant[]) => {
+  //     const updatedTenantIndex = tenants.findIndex(pl => pl.id === tenantId);
+  //     const updatedTenants = [...tenants];
+  //     const oldTenant = updatedTenants[updatedTenantIndex];
+  //     updatedTenants[updatedTenantIndex] = new Tenant(
+  //       name,
+  //       phone,
+  //       email,
+  //       SSN,
+  //       DOB,
+  //       DL,
+  //       oldTenant.id
+  //       );
+  //     // this._tenants.next(updatedTenants);
+  //   }));
+  // }
 }

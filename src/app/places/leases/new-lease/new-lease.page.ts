@@ -44,7 +44,7 @@ export class NewLeasePage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required]
       }),
-      rentDue: new FormControl(null, {
+      rentDueDay: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
       }),

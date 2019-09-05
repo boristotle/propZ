@@ -78,10 +78,10 @@ const routes: Routes = [
                         path: 'new',
                         loadChildren: './tenants/new-tenant/new-tenant.module#NewTenantPageModule'
                     },
-                    // {
-                    //     path: 'edit/:propertyId',
-                    //     loadChildren: './leases/edit-lease/edit-lease.module#EditLeasePageModule'
-                    // },
+                    {
+                        path: 'edit/:tenantId',
+                        loadChildren: './tenants/edit-tenant/edit-tenant.module#EditTenantPageModule'
+                    },
                     {
                         path: ':tenantId',
                         loadChildren: './tenants/tenant-details/tenant-details.module#TenantDetailsPageModule'

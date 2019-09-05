@@ -7,34 +7,37 @@
         <ion-title>{{ (tenant$ | async)?.name}}</ion-title>
     </ion-toolbar>
 </ion-header>
-      
-      <!-- <ion-button margin color="primary" [routerLink]="['/', 'places', 'tabs', 'properties', 'edit', placeId]">Edit</ion-button> -->
-      
-      <ion-content *ngIf="(tenant$ | async) as tenant">
-        <ion-card>
-            <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
-            <ion-card-header padding>
-              <ion-card-subtitle text-center>Tenant Details</ion-card-subtitle>
-            </ion-card-header>
-            <ion-item>
-                <ion-label>Phone</ion-label>
-                <ion-text fill="outline" slot="end">{{ tenant.phone }}</ion-text>
+            
+<ion-content *ngIf="(tenant$ | async) as tenant">
+    <ion-card>
+        <ion-item-sliding>
+            <ion-item [routerLink]="['/', 'places', 'tabs', 'tenants', 'edit', tenant.id]">
+                Edit Tenant
             </ion-item>
-            <ion-item>
-                <ion-label>Email</ion-label>
-                <ion-text fill="outline" slot="end">{{ tenant.email }}</ion-text>
-            </ion-item>
-            <ion-item>
-                <ion-label>SSN</ion-label>
-                <ion-text fill="outline" slot="end">{{ tenant.SSN }}</ion-text>
-            </ion-item>
-            <ion-item>
-                <ion-label>Date of Birth</ion-label>
-                <ion-text fill="outline" slot="end">{{ tenant.DOB | date }}</ion-text>
-            </ion-item>
-            <ion-item>
-                <ion-label>Drivers License</ion-label>
-                <ion-text fill="outline" slot="end">{{ tenant.DL }}</ion-text>
-            </ion-item>
-        </ion-card>
-      </ion-content>
+        </ion-item-sliding>
+        <!-- <ion-img src="https://www.parisperfect.com/g/apartment-hero-images/hi_lalande-64-new.jpg"></ion-img> -->
+        <ion-card-header padding>
+            <ion-card-subtitle text-center>Tenant Details</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Phone</ion-label>
+            <ion-text fill="outline" slot="end">{{ tenant.phone }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-text fill="outline" slot="end">{{ tenant.email }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>SSN</ion-label>
+            <ion-text fill="outline" slot="end">{{ tenant.SSN }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Date of Birth</ion-label>
+            <ion-text fill="outline" slot="end">{{ tenant.DOB | date }}</ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Drivers License</ion-label>
+            <ion-text fill="outline" slot="end">{{ tenant.DL }}</ion-text>
+        </ion-item>
+    </ion-card>
+</ion-content>

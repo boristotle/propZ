@@ -17,7 +17,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size-sm="12" offset-sm="0">
-          <ion-item *ngIf="(properties$ | async) as properties">
+          <ion-item *ngIf="properties">
               <ion-label>Address</ion-label>
               <ion-select value="PropertyId" formControlName="PropertyId" okText="Okay" cancelText="Dismiss">
                 <ion-select-option *ngFor="let property of properties" [value]="property.id">{{property.address}}</ion-select-option>
@@ -35,7 +35,7 @@
           <ion-col size-sm="12" offset-sm="0">
             <ion-item>
               <ion-label position="floating">Lease Start</ion-label>
-              <ion-datetime min="2019-01-01" max="2025-12-31" formControlName="leaseStart"></ion-datetime>
+              <ion-datetime min="1999-01-01" max="2099-12-31" formControlName="leaseStart"></ion-datetime>
             </ion-item>
           </ion-col>
       </ion-row>
@@ -43,7 +43,7 @@
           <ion-col size-sm="12" offset-sm="0">
               <ion-item>
                 <ion-label position="floating">Lease End</ion-label>
-                <ion-datetime min="2019-01-02" max="2025-12-31" formControlName="leaseEnd"></ion-datetime>
+                <ion-datetime min="1999-01-02" max="2099-12-31" formControlName="leaseEnd"></ion-datetime>
               </ion-item>
             </ion-col>
         </ion-row>

@@ -52,7 +52,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
-                rentDue: new FormControl(this.lease.rentDue, {
+                rentDueDay: new FormControl(this.lease.rentDueDay, {
                   updateOn: 'change',
                   validators: [Validators.required]
                 }),
@@ -94,7 +94,7 @@ export class EditLeasePage implements OnInit, OnDestroy {
         this.form.value.leaseEnd,
         this.form.value.deposit,
         this.form.value.rentAmountDue,
-        this.form.value.rentDue,
+        this.form.value.rentDueDay,
         this.form.value.dailyLateFee,
         this.form.value.lateDaysAllowed
         )

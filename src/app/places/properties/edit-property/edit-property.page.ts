@@ -52,6 +52,10 @@ export class EditPropertyPage implements OnInit, OnDestroy {
             updateOn: 'change',
             validators: [Validators.required]
           }),
+          mortgageDebt: new FormControl(this.property.mortgageDebt, {
+            updateOn: 'change',
+            validators: [Validators.required]
+          }),
           purchaseDate: new FormControl(this.property.purchaseDate, {
             updateOn: 'change',
             validators: [Validators.required]

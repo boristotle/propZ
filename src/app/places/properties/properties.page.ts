@@ -27,7 +27,7 @@ export class PropertiesPage implements OnInit {
   get totalMonthlyIncome() {
     if (this.properties) {
       return this.properties.reduce((acc, prop) => {
-        return acc + prop.Leases[0].rentAmountDue;
+        return acc + (prop.Leases[0] ? prop.Leases[0].rentAmountDue : 0);
       }, 0);
     }
     return 0;

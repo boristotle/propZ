@@ -28,7 +28,7 @@ export class LeasesService {
   addLease(
     leaseStart: string,
     leaseEnd: string,
-    rentDue: number,
+    rentDueDay: number,
     deposit: number,
     rentAmountDue: number,
     dailyLateFee: number,
@@ -37,7 +37,7 @@ export class LeasesService {
     const newLease = new Lease(
         leaseStart,
         leaseEnd,
-        rentDue,
+        rentDueDay,
         deposit,
         rentAmountDue,
         dailyLateFee,
@@ -58,7 +58,7 @@ export class LeasesService {
   updateLease(
     leaseStart: string,
     leaseEnd: string,
-    rentDue: number,
+    rentDueDay: number,
     deposit: number,
     rentAmountDue: number,
     dailyLateFee: number,
@@ -76,7 +76,7 @@ export class LeasesService {
       updatedLeases[updatedLeaseIndex] = new Lease(
         leaseStart,
         leaseEnd,
-        rentDue,
+        rentDueDay,
         deposit,
         rentAmountDue,
         dailyLateFee,

@@ -38,6 +38,10 @@ export class NewPropertyPage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required]
       }),
+      mortgageDebt: new FormControl(null, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
       purchaseDate: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]

@@ -63,6 +63,13 @@ export class DataService {
         );
     }
 
+    updateTenant(tenant: Tenant) {
+        return this.http.post(`http://localhost:3000/api/properties/${tenant.id}`, tenant).pipe(
+            map(res => res),
+            catchError(err => err)
+        );
+    }
+
     // EXPENSES
 
     getExpenses() {

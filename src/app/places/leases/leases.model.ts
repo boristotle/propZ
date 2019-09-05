@@ -2,7 +2,7 @@ export class Lease {
     constructor(
         public leaseStart: string,
         public leaseEnd: string,
-        public rentDue: number,
+        public rentDueDay: number,
         public deposit: number,
         public rentAmountDue: number,
         public dailyLateFee: number,
