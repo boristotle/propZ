@@ -85,7 +85,7 @@ export class DataService {
     }
 
     createExpense(expense: Expense) {
-        return this.http.post('http://localhost:3000/api/expense', expense).pipe(
+        return this.http.post('http://localhost:3000/api/expenses', expense).pipe(
             map(res => res),
             catchError(err => err)
         );

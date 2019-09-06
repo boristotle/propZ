@@ -15,11 +15,12 @@ import { Property } from '../property.model';
 export class ExpensesPage implements OnInit {
 
   constructor(private dataService: DataService, private router: Router) { }
-  PropertyId;
   expenses: Expense[] = [];
   filteredExpenses;
   properties: Property[] = [];
   expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
+  propertyId;
+  category;
 
   ngOnInit() {
     this.dataService.getExpenses().subscribe((res: Expense[]) => {
@@ -51,11 +52,17 @@ export class ExpensesPage implements OnInit {
     this.router.navigate(['/', 'places', 'tabs', 'expenses', 'edit', offerId]);
   }
 
-  filterByCategory(category) {
-    this.filteredExpenses = this.expenses.filter(e => e.category === category);
+
+  filterExpenses() {
+    if (this.propertyId && this.category) {
+      this.filteredExpenses = this.expenses.filter(e => e.PropertyId === this.propertyId && e.category === this.category);
+    } else if (this.propertyId && !this.category) {
+        this.filteredExpenses = this.expenses.filter(e => e.PropertyId === this.propertyId);
+    } else if (this.category && !this.propertyId) {
+        this.filteredExpenses = this.expenses.filter(e => e.category === this.category);
+    } else {
+        this.filteredExpenses = this.expenses;
+    }
   }
 
-  filterByProperty(propertyId) {
-    this.filteredExpenses = this.expenses.filter(e => e.PropertyId === propertyId);
-  }
 }

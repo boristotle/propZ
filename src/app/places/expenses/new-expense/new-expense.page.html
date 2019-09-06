@@ -28,7 +28,7 @@
             <ion-col size-sm="12" offset-sm="0">
             <ion-item *ngIf="(properties$ | async) as properties">
                 <ion-label>Address</ion-label>
-                <ion-select value="propertyId" okText="Okay" cancelText="Dismiss">
+                <ion-select formControlName="PropertyId" [value]="PropertyId" okText="Okay" cancelText="Dismiss">
                     <ion-select-option *ngFor="let property of properties" [value]="property.id">{{property.address}}</ion-select-option>
                 </ion-select>
                 </ion-item>
@@ -54,7 +54,7 @@
                 <ion-col size-sm="12" offset-sm="0">
                 <ion-item>
                     <ion-label>Category</ion-label>
-                    <ion-select (ionChange)="" value="category" okText="Okay" cancelText="Dismiss">
+                    <ion-select formControlName="category" [value]="category" okText="Okay" cancelText="Dismiss">
                         <ion-select-option *ngFor="let category of expenseCategories" [value]="category">{{category}}</ion-select-option>
                     </ion-select>
                     </ion-item>
