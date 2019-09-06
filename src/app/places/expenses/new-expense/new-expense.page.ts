@@ -16,6 +16,7 @@ export class NewExpensePage implements OnInit {
   form: FormGroup;
   properties$: Observable<Property[] | {}>;
   expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
+  category;
 
   constructor(
     private placesService: PlacesService,
@@ -40,6 +41,10 @@ export class NewExpensePage implements OnInit {
         updateOn: 'change',
         validators: [Validators.required]
       }),
+      note: new FormControl(null, {
+        updateOn: 'change',
+        validators: []
+      }),
       category: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required]
@@ -47,7 +52,12 @@ export class NewExpensePage implements OnInit {
     });
   }
 
+  selectCategory(event) {
+    this.category = event.details.value;
+  }
+
   onCreateExpense() {
+    console.log('this.form', this.form);
     if (!this.form.valid) {
       return;
     }

@@ -54,9 +54,17 @@
                 <ion-col size-sm="12" offset-sm="0">
                 <ion-item>
                     <ion-label>Category</ion-label>
-                    <ion-select value="category" okText="Okay" cancelText="Dismiss">
+                    <ion-select (ionChange)="" value="category" okText="Okay" cancelText="Dismiss">
                         <ion-select-option *ngFor="let category of expenseCategories" [value]="category">{{category}}</ion-select-option>
                     </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="12" offset-sm="0">
+                    <ion-item>
+                    <ion-label position="floating">Note</ion-label>
+                    <ion-input type="text" formControlName="note"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
