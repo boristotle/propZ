@@ -71,15 +71,15 @@
         </ion-card-header>
         <ion-item>
             <ion-label>Revenue</ion-label>
-            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ revenue | currency:'USD' }}</ion-text>
         </ion-item>
         <ion-item>
             <ion-label>Expenses</ion-label>
-            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ expenses | currency:'USD' }}</ion-text>
         </ion-item>
         <ion-item>
             <ion-label>Profit</ion-label>
-            <ion-text fill="outline" slot="end">{{ <!--lease.totalExpenses--> }}</ion-text>
+            <ion-text fill="outline" slot="end">{{ (revenue - expenses)  | currency:'USD' }}</ion-text>
         </ion-item>
 
         <!-- <ion-card-header padding>

@@ -37,6 +37,22 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
     }
   }
 
+  get revenue() {
+    if (this.property) {
+      return this.property.Leases[0].LeasePayments.reduce((acc, lp) => {
+        return acc + lp.amountPaid;
+      }, 0);
+    }
+  }
+
+  get expenses() {
+    if (this.property) {
+      return this.property.Expenses.reduce((acc, exp) => {
+        return acc + exp.amount;
+      }, 0);
+    }
+  }
+
 
   // get totalMonthlyIncome() {
   //   if (this.properties) {

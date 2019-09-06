@@ -12,5 +12,6 @@ export class Lease {
         public id?: number,
         public PropertyId?: number,
         public Property?: Property,
+        public LeasePayments?: {amountPaid: number}[]
     ) {}
 }

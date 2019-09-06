@@ -14,5 +14,6 @@ export class Property {
         public insurance: number,
         public taxes: number,
         public id?: number,
+        public Expenses?: { amount: number }[]
         ) {}
 }
