@@ -54,6 +54,8 @@ export class ExpensesPage implements OnInit {
 
 
   filterExpenses() {
+    console.log('this.category', this.category);
+    console.log('this.propertyId', this.propertyId);
     if (this.propertyId && this.category) {
       this.filteredExpenses = this.expenses.filter(e => e.PropertyId === this.propertyId && e.category === this.category);
     } else if (this.propertyId && !this.category) {
