@@ -38,11 +38,12 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
   }
 
   get revenue() {
-    if (this.property) {
+    if (this.property && this.property.Leases[0]) {
       return this.property.Leases[0].LeasePayments.reduce((acc, lp) => {
         return acc + lp.amountPaid;
       }, 0);
     }
+    return 0;
   }
 
   get expenses() {
@@ -51,6 +52,7 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
         return acc + exp.amount;
       }, 0);
     }
+    return 0;
   }
 
 
