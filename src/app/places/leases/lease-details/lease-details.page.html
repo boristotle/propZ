@@ -74,7 +74,7 @@
         <ion-label>Next Payment Due</ion-label>
         <ion-text fill="outline" slot="end">{{ lease.LeasePayments[0].daysUntilNextPaymentDue }} days</ion-text>
     </ion-item>
-    <ion-item *ngIf="lease.LeasePayments[0].daysPastDue">
+    <ion-item *ngIf="lease.LeasePayments[0]">
         <ion-label>Days Past Due</ion-label>
         <ion-text fill="outline" slot="end">{{ lease.LeasePayments[0].daysPastDue }} days</ion-text>
     </ion-item>

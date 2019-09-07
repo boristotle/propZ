@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DataService } from './services/data-service';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,8 @@ import { DataService } from './services/data-service';
   providers: [
     DataService,
     StatusBar,
+    FileTransfer,
+    File,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

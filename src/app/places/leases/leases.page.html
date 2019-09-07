@@ -27,7 +27,7 @@
             <h6>{{lease.leaseStart | date}} to {{lease.leaseEnd | date}}</h6>
             <p>{{lease.rentAmountDue | currency:'USD'}}/month</p>
             <p>Next payment due in {{ lease.LeasePayments[0].daysUntilNextPaymentDue }} days</p>
-            <p *ngIf="lease.LeasePayments[0].daysPastDue">Payment is {{ lease.LeasePayments[0].daysPastDue }} days late</p>
+            <p *ngIf="lease.LeasePayments[0]">Payment is {{ lease.LeasePayments[0].daysPastDue }} days late</p>
             <p>Lease ends in {{lease.daysUntilLeaseEnd}} days</p>
           </ion-label>
         </ion-item>

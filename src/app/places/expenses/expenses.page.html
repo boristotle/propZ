@@ -54,11 +54,23 @@
             <ion-item-sliding *ngFor="let expense of filteredExpenses" #slidingItem>
                 <ion-item  [routerLink]="['/', 'places', 'tabs', 'expenses', expense.id]">
                     <ion-label>
-                        <h4>{{expense.amount | currency:'USD'}}</h4>
+                        <h4>Amount: {{expense.amount | currency:'USD'}}</h4>
+                        <p>Category: {{expense.category}}</p>
+                        <p>Note: {{expense.note}}</p>
+                        <p>Property: </p>
                         <div class="expense-details">
+
                         </div>
                     </ion-label>
                 </ion-item>
+                <!-- <ion-row>
+                        <ion-col size-sm="12" offset-sm="0">
+                            <ion-item [routerLink]="['/', 'places', 'tabs', 'expenses', expense.id]">
+                                <ion-label>{{expense.category}}</ion-label>
+                                <ion-text fill="outline" slot="end">{{ epxense.amount | currency:'USD' }}</ion-text>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row> -->
                         
             <ion-item-options side="end">
                 <ion-item-option color="secondary" (click)="onEdit(expense.id, slidingItem)">

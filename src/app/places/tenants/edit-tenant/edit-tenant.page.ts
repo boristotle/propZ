@@ -78,12 +78,14 @@ export class EditTenantPage implements OnInit {
 
     get selectedLeaseText() {
         if (this.leases && this.tenant) {
-            return this.leases.find(l => l.id === this.tenant.LeaseId).Property.address;
+          const lease = this.leases.find(l => l.id === this.tenant.LeaseId);
+          if (lease) {
+            return lease.Property.address;
         }
+      }
     }
 
     selectLease(event) {
-        // console.log('event', event.detail.value);
         this.tenant.LeaseId = event.detail.value;
     }
 
@@ -94,25 +96,25 @@ export class EditTenantPage implements OnInit {
       }
 
     onEditTenant() {
-    if (!this.form.valid) {
-      return;
+      if (!this.form.valid) {
+        return;
+      }
+
+      this.loadingCtrl.create({
+        message: 'Edit tenant...'
+      })
+      .then(loadingEl => {
+        loadingEl.present();
+        const tenant = { ...this.form.value, id: this.tenantId };
+
+        this.dataService
+          .updateTenant(tenant)
+          .subscribe(() => {
+            loadingEl.dismiss();
+            this.form.reset();
+            this.router.navigate(['/places/tabs/tenants']);
+          });
+      });
     }
-
-    this.loadingCtrl.create({
-      message: 'Edit tenant...'
-    })
-    .then(loadingEl => {
-      loadingEl.present();
-      const tenant = { ...this.form.value, id: this.tenantId };
-
-      this.dataService
-        .updateTenant(tenant)
-        .subscribe(() => {
-          loadingEl.dismiss();
-          this.form.reset();
-          this.router.navigate(['/places/tabs/tenants']);
-        });
-    });
-  }
 
 }

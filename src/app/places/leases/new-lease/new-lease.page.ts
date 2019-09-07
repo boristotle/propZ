@@ -2,11 +2,12 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { LeasesService } from '../leases.service';
 import { Property } from '../../property.model';
 import { PlacesService } from '../../places.service';
-import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data-service';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 
 @Component({
   selector: 'app-new-lease',
@@ -16,13 +17,18 @@ import { DataService } from 'src/app/services/data-service';
 export class NewLeasePage implements OnInit {
   form: FormGroup;
   properties: Property[] = [];
+  fileTransfer;
 
   constructor(
+    private transfer: FileTransfer,
+    private file: File,
     private dataService: DataService,
     private placesService: PlacesService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    ) { }
+    ) {
+      this.fileTransfer = this.transfer.create();
+    }
 
   ngOnInit() {
     this.dataService.getProperties().subscribe((res: Property[]) => {
@@ -67,6 +73,10 @@ export class NewLeasePage implements OnInit {
     });
   }
 
+  getImageDetails(event) {
+    console.log('event', event);
+  }
+
   onCreateLease() {
     if (!this.form.valid) {
       return;
@@ -88,6 +98,21 @@ export class NewLeasePage implements OnInit {
         });
     });
 
+  }
+
+  upload() {
+    const options: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: 'name.jpg',
+       headers: {}
+    };
+
+    this.fileTransfer.upload('<file path>', '<api endpoint>', options)
+     .then((data) => {
+       // success
+     }, (err) => {
+       // error
+     });
   }
 
 }
