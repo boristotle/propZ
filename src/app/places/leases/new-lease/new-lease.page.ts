@@ -5,7 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { Property } from '../../property.model';
 import { PlacesService } from '../../places.service';
 import { DataService } from 'src/app/services/data-service';
-// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
 // import { File } from '@ionic-native/file/ngx';
 // import { FilePath } from '@ionic-native/file-path/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
@@ -22,7 +22,7 @@ export class NewLeasePage implements OnInit {
   leaseFile;
 
   constructor(
-    // private transfer: FileTransfer,
+    private transfer: FileTransfer,
     // private file: File,
     private chooser: Chooser,
     // private filePath: FilePath,
@@ -30,10 +30,7 @@ export class NewLeasePage implements OnInit {
     private placesService: PlacesService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    // private fileChooser: FileChooser
-    ) {
-      // this.fileTransfer = this.transfer.create();
-    }
+    ) {}
 
   ngOnInit() {
     this.dataService.getProperties().subscribe((res: Property[]) => {
@@ -112,8 +109,26 @@ export class NewLeasePage implements OnInit {
 
   upload() {
     this.chooser.getFile()
-      .then(file => console.log('hello**', file))
-      .catch((error: any) => console.error(error));
+      .then((file) => {
+
+        const fileTransfer = this.transfer.create();
+        const options: FileUploadOptions = {
+          fileKey: 'leaseDoc',
+          chunkedMode: true,
+          fileName: file.name,
+          mimeType: file.mediaType
+        };
+
+        fileTransfer.upload(file.dataURI, 'http://10.0.2.2:3000/api/leases', options)
+          .then((data) => {
+            console.log('data', data);
+            // success
+          }, (err) => {
+            console.log('err', err);
+            // error
+          });
+      })
+      .catch((err: any) => console.log('err', err));
 
     // this.fileChooser.open()
     //   .then((uri) => {
@@ -156,15 +171,7 @@ export class NewLeasePage implements OnInit {
     // console.log('upload', this);
     // console.log('this.leaseFilePath', this.leaseFilePath);
     // console.log('base64', encodeImageFileAsURL());
-    // const fileTransfer = this.transfer.create();
-    // fileTransfer.upload(this.leaseFilePath, encodeURI('http://10.0.2.2:3000/api/leases'), options)
-    //  .then((data) => {
-    //    console.log('data', data);
-    //    // success
-    //  }, (err) => {
-    //    console.log('err', err);
-    //    // error
-    //  });
+
   }
 
 }

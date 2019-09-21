@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DataService } from './services/data-service';
-// import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 // import { File } from '@ionic-native/file/ngx';
 // import { FilePath } from '@ionic-native/file-path/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
@@ -23,7 +23,7 @@ import { Chooser } from '@ionic-native/chooser/ngx';
   providers: [
     DataService,
     StatusBar,
-    // FileTransfer,
+    FileTransfer,
     // FileChooser,
     Chooser,
     // File,
