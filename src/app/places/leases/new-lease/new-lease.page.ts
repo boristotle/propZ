@@ -7,7 +7,6 @@ import { PlacesService } from '../../places.service';
 import { DataService } from 'src/app/services/data-service';
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 // import { File } from '@ionic-native/file/ngx';
-// import { FileChooser } from '@ionic-native/file-chooser/ngx';
 // import { FilePath } from '@ionic-native/file-path/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
 
@@ -113,7 +112,7 @@ export class NewLeasePage implements OnInit {
 
   upload() {
     this.chooser.getFile()
-      .then(file => console.log(file))
+      .then(file => console.log('hello**', file))
       .catch((error: any) => console.error(error));
 
     // this.fileChooser.open()
