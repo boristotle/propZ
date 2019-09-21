@@ -19,11 +19,18 @@ export class NotificationsService {
         2
       ),
       new Notification(
-        'Lease expiring in 11 days',
-        'Lease Expiring',
+        'Rent is 11 days late',
+        'Late Rent',
         '10-22-2020',
         1,
         2
+      ),
+      new Notification(
+        'Toilet is plugged and won\'t flush',
+        'Service Request',
+        '10-22-2020',
+        1,
+        3
       ),
     ]
   );

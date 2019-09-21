@@ -6,6 +6,7 @@ import { Lease } from '../places/leases/leases.model';
 import { Observable } from 'rxjs';
 import { Expense } from '../places/expenses/expenses.model';
 import { Tenant } from '../places/tenants/tenants.model';
+const EMULATOR_URL = '10.0.2.2:3000';
 
 @Injectable()
 export class DataService {
@@ -13,13 +14,13 @@ export class DataService {
 
     // LEASES
     getLeases() {
-        return this.http.get('http://localhost:3000/api/leases').pipe(
+        return this.http.get(`http://${EMULATOR_URL}/api/leases`).pipe(
             catchError(err => err)
         );
     }
 
     createLease(lease: Lease) {
-        return this.http.post('http://localhost:3000/api/leases', lease).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/leases`, lease).pipe(
             map(res => res),
             catchError(err => err)
         );
@@ -28,20 +29,20 @@ export class DataService {
 
     // PROPERTIES
     getProperties() {
-        return this.http.get('http://localhost:3000/api/properties').pipe(
+        return this.http.get(`http://${EMULATOR_URL}/api/properties`).pipe(
             catchError(err => err)
         );
     }
 
     createProperty(property: Property) {
-        return this.http.post('http://localhost:3000/api/properties', property).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/properties`, property).pipe(
             map(res => res),
             catchError(err => err)
         );
     }
 
     updateProperty(property: Property) {
-        return this.http.post(`http://localhost:3000/api/properties/${property.id}`, property).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/properties/${property.id}`, property).pipe(
             map(res => res),
             catchError(err => err)
         );
@@ -51,20 +52,20 @@ export class DataService {
     // TENANTS
 
     getTenants() {
-        return this.http.get('http://localhost:3000/api/tenants').pipe(
+        return this.http.get(`http://${EMULATOR_URL}/api/tenants`).pipe(
             catchError(err => err)
         );
     }
 
     createTenant(tenant: Tenant) {
-        return this.http.post('http://localhost:3000/api/tenants', tenant).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/tenants`, tenant).pipe(
             map(res => res),
             catchError(err => err)
         );
     }
 
     updateTenant(tenant: Tenant) {
-        return this.http.post(`http://localhost:3000/api/tenants/${tenant.id}`, tenant).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/tenants/${tenant.id}`, tenant).pipe(
             map(res => res),
             catchError(err => err)
         );
@@ -73,19 +74,19 @@ export class DataService {
     // EXPENSES
 
     getExpenses() {
-        return this.http.get('http://localhost:3000/api/expenses').pipe(
+        return this.http.get(`http://${EMULATOR_URL}/api/expenses`).pipe(
             catchError(err => err)
         );
     }
 
     getExpense(id) {
-        return this.http.get(`http://localhost:3000/api/expenses/${id}`).pipe(
+        return this.http.get(`http://${EMULATOR_URL}/api/expenses/${id}`).pipe(
             catchError(err => err)
         );
     }
 
     createExpense(expense: Expense) {
-        return this.http.post('http://localhost:3000/api/expenses', expense).pipe(
+        return this.http.post(`http://${EMULATOR_URL}/api/expenses`, expense).pipe(
             map(res => res),
             catchError(err => err)
         );

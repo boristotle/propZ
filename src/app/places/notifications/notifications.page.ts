@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class NotificationsPage implements OnInit {
   notifications$: Observable<Notification[]>;
-  notificationCategories = ['late-rent', 'service-request', ''];
+  notificationCategories = ['Late Rent', 'Service Request', 'Lease Ending Soon'];
   private notificationsSub: Subscription;
 
   constructor(
@@ -29,7 +29,7 @@ export class NotificationsPage implements OnInit {
 
   filterByCategory(category) {
     // this.category = category;
-    // this.filteredExpenses = this.expenses.filter(e => e.category === category);
+    // this.filteredNotifications = this.notifications.filter(n => n.category === category);
   }
 
   // onOpenMenu() {

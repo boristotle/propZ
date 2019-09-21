@@ -25,8 +25,8 @@ export class PropertiesPage implements OnInit {
   }
 
   get totalMonthlyIncome() {
-    if (this.properties) {
-      return this.properties.reduce((acc, prop) => {
+    if (this.filteredProperties) {
+      return this.filteredProperties.reduce((acc, prop) => {
         return acc + (prop.Leases[0] ? prop.Leases[0].rentAmountDue : 0);
       }, 0);
     }
@@ -34,8 +34,8 @@ export class PropertiesPage implements OnInit {
   }
 
   get totalMonthlyExpenses() {
-    if (this.properties) {
-      return this.properties.reduce((acc, prop) => {
+    if (this.filteredProperties) {
+      return this.filteredProperties.reduce((acc, prop) => {
         return acc + ((prop.mortgage + prop.insurance + prop.taxes) / 12);
       }, 0);
     }
@@ -43,8 +43,8 @@ export class PropertiesPage implements OnInit {
   }
 
   get totalEquity() {
-    if (this.properties) {
-      return this.properties.reduce((acc, prop) => {
+    if (this.filteredProperties) {
+      return this.filteredProperties.reduce((acc, prop) => {
         return acc + (prop.homeValue - prop.purchasePrice);
       }, 0);
     }
@@ -52,8 +52,8 @@ export class PropertiesPage implements OnInit {
   }
 
   get totalMortgageDebt() {
-    if (this.properties) {
-      return this.properties.reduce((acc, prop) => {
+    if (this.filteredProperties) {
+      return this.filteredProperties.reduce((acc, prop) => {
         return acc + prop.mortgageDebt;
       }, 0);
     }

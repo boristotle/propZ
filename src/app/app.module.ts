@@ -11,8 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DataService } from './services/data-service';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
+// import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+// import { File } from '@ionic-native/file/ngx';
+// import { FileChooser } from '@ionic-native/file-chooser/ngx';
+// import { FilePath } from '@ionic-native/file-path/ngx';
+import { Chooser } from '@ionic-native/chooser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +24,11 @@ import { File } from '@ionic-native/file/ngx';
   providers: [
     DataService,
     StatusBar,
-    FileTransfer,
-    File,
+    // FileTransfer,
+    // FileChooser,
+    Chooser,
+    // File,
+    // FilePath,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

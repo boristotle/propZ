@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Property } from '../../property.model';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, ActionSheetController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 
@@ -17,6 +17,7 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
+    private actionSheetCtrl: ActionSheetController,
     private placesService: PlacesService) { }
 
   ngOnInit() {
@@ -30,6 +31,52 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
       });
     });
   }
+
+  selectDocumentOrPhoto() {
+    this.actionSheetCtrl.create({
+      header: 'Choose an Action',
+      buttons: [
+        {
+          text: 'Select Date',
+          handler: () => {
+            // this.openBookingModal('select');
+          }
+        },
+        {
+          text: 'Random Date',
+          handler: () => {
+            // this.openBookingModal('random');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    }).then(actionSheetEl => {
+      actionSheetEl.present();
+    });
+  }
+
+  openBookingModal(mode: 'select' | 'random') {
+    // console.log(mode);
+    // this.modalCtrl
+    // .create({
+    //   component: CreateBookingComponent,
+    //   componentProps: {selectedPlace: this.place, selectedMode: mode}
+    // })
+    // .then(modalEl => {
+    //   modalEl.present();
+    //   return modalEl.onDidDismiss();
+    // })
+    // .then(resultData => {
+    //   console.log(resultData.data, resultData.role);
+    //   if (resultData.role === 'confirm') {
+    //     console.log('Booked!');
+    //   }
+    // });
+  }
+
 
   get propertyId() {
     if (this.property) {
