@@ -12,9 +12,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DataService } from './services/data-service';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-// import { File } from '@ionic-native/file/ngx';
-// import { FilePath } from '@ionic-native/file-path/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
+import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,10 +23,8 @@ import { Chooser } from '@ionic-native/chooser/ngx';
     DataService,
     StatusBar,
     FileTransfer,
-    // FileChooser,
+    CameraPreview,
     Chooser,
-    // File,
-    // FilePath,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
