@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { Chooser } from '@ionic-native/chooser/ngx';
   templateUrl: './new-lease.page.html',
   styleUrls: ['./new-lease.page.scss'],
 })
-export class NewLeasePage implements OnInit {
+export class NewLeasePage implements OnInit, OnDestroy {
   form: FormGroup;
   properties: Property[] = [];
 
@@ -135,11 +135,11 @@ export class NewLeasePage implements OnInit {
       (res) => {
        setTimeout(() => {
         this.takePhoto();
-       }, 2000)
+       }, 2000);
       },
       (err) => {
-        if (err !== "Camera already started!") {
-          console.log('Camera start error: ', err)
+        if (err !== 'Camera already started!') {
+          console.log('Camera start error: ', err);
         }
       });
   }
@@ -160,8 +160,9 @@ export class NewLeasePage implements OnInit {
         chunkedMode: true
       };
 
-      fileTransfer.upload(base64PictureData, encodeURI('http://10.0.2.2:3000/api/leases'), options)
+      fileTransfer.upload(`data:image/jpeg;base64,${base64PictureData}`, encodeURI('http://10.0.2.2:3000/api/leases'), options)
         .then((data) => {
+          this.stopCamera();
           console.log('data', data);
           // success
         }, (err) => {
@@ -174,7 +175,7 @@ export class NewLeasePage implements OnInit {
       // this.navCtrl.pop();
   }
 
-    
+
   ngOnDestroy() {
     this.cameraPreview.stopCamera().then(
       (res) => {
