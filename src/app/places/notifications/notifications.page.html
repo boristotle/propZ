@@ -15,7 +15,8 @@
       <ion-col size-sm="12" offset-sm="0">
           <ion-item>
               <ion-label>Filter By Category</ion-label>
-              <ion-select [(ngModel)]="category" (ionChange)="filterByCategory(category)" okText="Okay" cancelText="Dismiss">
+              <ion-select [(ngModel)]="category" (ionChange)="filterNotifications()" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option [value]="''">All Categories</ion-select-option>
                   <ion-select-option *ngFor="let category of notificationCategories" [value]="category">{{category}}</ion-select-option>
               </ion-select>
           </ion-item>
@@ -26,7 +27,7 @@
       <ion-segment-button value="bookable">Bookable Places</ion-segment-button>
     </ion-segment> -->
     <!-- {{ (notifications$ | async) | json }} -->
-    <ion-grid *ngIf="(notifications$ | async)?.length === []">
+    <ion-grid *ngIf="!notifications">
       <ion-row>
         <ion-col size="12" size-sm="8" offset-sm="2" text-center>
           <p>There are no notifications right now, please come back later!</p>
@@ -37,13 +38,13 @@
       <ion-row>
         <ion-col size="12" size-sm="12" offset-sm="0" text-center>
           <ion-list>
-          <ion-item *ngFor="let notification of (notifications$ | async)"
+          <ion-item *ngFor="let notification of filteredNotifications"
               [routerLink]="['/', 'places', 'tabs', 'notifications', notification.id ]" detail >
             <!-- <ion-thumbnail slot="start">
               <ion-img [src]="notification.imageUrl"></ion-img>
             </ion-thumbnail> -->
             <ion-label>
-              <h2>{{notification.category}}</h2>
+              <h2>{{notification.category}} - {{notification.Property.address}}</h2>
               <p>{{notification.description}}</p>
             </ion-label>
           </ion-item>

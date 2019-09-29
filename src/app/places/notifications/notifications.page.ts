@@ -6,6 +6,7 @@ import { AuthService } from '../../auth/auth.service';
 import { NotificationsService } from './notifications.service';
 import { Notification } from './notifications.model';
 import { map } from 'rxjs/operators';
+import { DataService } from 'src/app/services/data-service';
 
 @Component({
   selector: 'app-notifications',
@@ -13,23 +14,37 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  notifications$: Observable<Notification[]>;
-  notificationCategories = ['Late Rent', 'Service Request', 'Lease Ending Soon'];
-  private notificationsSub: Subscription;
+  notifications: Notification[];
+  filteredNotifications: Notification[];
+  notificationCategories = ['Late Rent', 'Service Request', 'Lease Expiring'];
+  category;
+  propertyId;
 
   constructor(
-    private notificationsService: NotificationsService,
-    private menuCtrl: MenuController,
-    private authService: AuthService
+    private dataService: DataService
   ) { }
 
   ngOnInit() {
-    this.notifications$ = this.notificationsService.notifications;
+    this.dataService.getNotifications().subscribe((res: Notification[]) => {
+      this.notifications = res;
+      this.filteredNotifications = [...res];
+     }, err => {
+       console.log('err', err);
+     });
   }
 
-  filterByCategory(category) {
-    // this.category = category;
-    // this.filteredNotifications = this.notifications.filter(n => n.category === category);
+  filterNotifications() {
+    console.log('this.category', this.category);
+    console.log('this.propertyId', this.propertyId);
+    if (this.propertyId && this.category) {
+      this.filteredNotifications = this.notifications.filter(e => e.PropertyId === this.propertyId && e.category === this.category);
+    } else if (this.propertyId && !this.category) {
+        this.filteredNotifications = this.notifications.filter(e => e.PropertyId === this.propertyId);
+    } else if (this.category && !this.propertyId) {
+        this.filteredNotifications = this.notifications.filter(e => e.category === this.category);
+    } else {
+        this.filteredNotifications = this.notifications;
+    }
   }
 
   // onOpenMenu() {

@@ -9,6 +9,9 @@ import { Notification } from './notifications.model';
   providedIn: 'root'
 })
 export class NotificationsService {
+      // insert into "Notifications" values (default, 1, 'Lease Expiring', '10-22-2020', '10-22-2020', 'Lease expiring in 7 days');
+      // insert into "Notifications" values (default, 1, 'Late Rent', '10-22-2020', '10-22-2020', 'Rent is 11 days late');
+      // insert into "Notifications" values (default, 1, 'Service Request', '10-22-2020', '10-22-2020', 'Toilet is plugged and wont flush');
 
   private _notifications = new BehaviorSubject<Notification[]>([
       new Notification(

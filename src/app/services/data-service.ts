@@ -6,8 +6,8 @@ import { Lease } from '../places/leases/leases.model';
 import { Observable } from 'rxjs';
 import { Expense } from '../places/expenses/expenses.model';
 import { Tenant } from '../places/tenants/tenants.model';
-const EMULATOR_URL = '10.0.2.2:3000';
-// const EMULATOR_URL = 'localhost:3000';
+// const EMULATOR_URL = '10.0.2.2:3000';
+const EMULATOR_URL = 'localhost:3000';
 
 @Injectable()
 export class DataService {
@@ -92,4 +92,14 @@ export class DataService {
             catchError(err => err)
         );
     }
+
+
+    // NOTIFICATIONS
+
+    getNotifications() {
+        return this.http.get(`http://${EMULATOR_URL}/api/notifications`).pipe(
+            catchError(err => err)
+        );
+    }
+
 }
