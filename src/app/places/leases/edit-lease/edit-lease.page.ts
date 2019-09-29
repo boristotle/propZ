@@ -7,6 +7,8 @@ import { Subscription, Observable } from 'rxjs';
 import { Lease } from '../leases.model';
 import { Property } from '../../property.model';
 import { DataService } from 'src/app/services/data-service';
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-edit-lease',
@@ -17,9 +19,13 @@ export class EditLeasePage implements OnInit, OnDestroy {
   form: FormGroup;
   lease: Lease;
   properties$: Observable<Property[] | {}>;
+  downloadedFile;
+  error;
   private leasesSub: Subscription;
 
   constructor(
+    private transfer: FileTransfer,
+    private file: File,
     private leasesService: LeasesService,
     private dataService: DataService,
     private router: Router,
@@ -104,6 +110,24 @@ export class EditLeasePage implements OnInit, OnDestroy {
           this.router.navigate(['/places/tabs/leases']);
       });
     });
+  }
+
+  viewLeaseDocument() {
+    const fileTransfer = this.transfer.create();
+
+    fileTransfer.download(
+      encodeURI(`http://10.0.2.2:3000/api/images/2/original`),
+      this.file.externalDataDirectory,
+      // this.file.externalRootDirectory + '/Download/file.jpg',
+      true,
+      )
+      .then((file) => {
+        this.downloadedFile = file;
+        console.log('success');
+      }, err => {
+        this.error = err;
+        console.log('err', err);
+      });
 
   }
 

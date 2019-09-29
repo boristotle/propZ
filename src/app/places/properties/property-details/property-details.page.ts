@@ -32,31 +32,31 @@ export class PropertyDetailsPage implements OnInit, OnDestroy {
     });
   }
 
-  selectDocumentOrPhoto() {
-    this.actionSheetCtrl.create({
-      header: 'Choose an Action',
-      buttons: [
-        {
-          text: 'Select Date',
-          handler: () => {
-            // this.openBookingModal('select');
-          }
-        },
-        {
-          text: 'Random Date',
-          handler: () => {
-            // this.openBookingModal('random');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    }).then(actionSheetEl => {
-      actionSheetEl.present();
-    });
-  }
+  // selectDocumentOrPhoto() {
+  //   this.actionSheetCtrl.create({
+  //     header: 'Choose an Action',
+  //     buttons: [
+  //       {
+  //         text: 'Select Date',
+  //         handler: () => {
+  //           // this.openBookingModal('select');
+  //         }
+  //       },
+  //       {
+  //         text: 'Random Date',
+  //         handler: () => {
+  //           // this.openBookingModal('random');
+  //         }
+  //       },
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel'
+  //       }
+  //     ]
+  //   }).then(actionSheetEl => {
+  //     actionSheetEl.present();
+  //   });
+  // }
 
   openBookingModal(mode: 'select' | 'random') {
     // console.log(mode);

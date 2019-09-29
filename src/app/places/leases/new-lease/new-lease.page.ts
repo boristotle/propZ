@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ActionSheetController, Platform } from '@ionic/angular';
 import { Property } from '../../property.model';
-import { PlacesService } from '../../places.service';
 import { DataService } from 'src/app/services/data-service';
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
-import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
+import { CameraPreview, CameraPreviewOptions } from '@ionic-native/camera-preview/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
+// import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-new-lease',
@@ -17,16 +17,23 @@ import { Chooser } from '@ionic-native/chooser/ngx';
 export class NewLeasePage implements OnInit, OnDestroy {
   form: FormGroup;
   properties: Property[] = [];
+  leaseDocument;
+  error;
+  uploadedFile;
+  awaitingFileAttachment = false; // NOT IMPLEMENTED, use this to wait for file chooser to resolve
 
   constructor(
     private transfer: FileTransfer,
+    // private file: File,
     private chooser: Chooser,
     private dataService: DataService,
-    private placesService: PlacesService,
+    private actionSheetCtrl: ActionSheetController,
     private router: Router,
-    private cameraPreview: CameraPreview,
+    protected cameraPreview: CameraPreview,
     private loadingCtrl: LoadingController,
-    ) {}
+    ) {
+      // super(cameraPreview);
+    }
 
   ngOnInit() {
     this.dataService.getProperties().subscribe((res: Property[]) => {
@@ -83,40 +90,50 @@ export class NewLeasePage implements OnInit, OnDestroy {
       loadingEl.present();
       const lease = { ...this.form.value };
 
-      this.dataService
-        .createLease(lease)
-        .subscribe(() => {
+      const fileTransfer = this.transfer.create();
+      const options: FileUploadOptions = {
+        fileKey: 'leaseDoc',
+        chunkedMode: true,
+        fileName: this.leaseDocument.name,
+        mimeType: this.leaseDocument.mediaType,
+        params: lease
+      };
+
+      fileTransfer.upload(this.leaseDocument.dataURI, encodeURI('http://10.0.2.2:3000/api/leases'), options)
+        .then((data) => {
           loadingEl.dismiss();
           this.form.reset();
           this.router.navigate(['/places/tabs/leases']);
+          console.log('data', data);
+          // success
+        }, (err) => {
+          loadingEl.dismiss();
+          console.log('err, failed to save lease', err);
+          // error
         });
+
+      // this.dataService
+      //   .createLease(lease)
+      //   .subscribe(() => {
+      //     loadingEl.dismiss();
+      //     this.form.reset();
+      //     this.router.navigate(['/places/tabs/leases']);
+      //   });
     });
 
   }
 
-  // upload() {
-  //   this.chooser.getFile()
-  //     .then((file) => {
-
-  //       const fileTransfer = this.transfer.create();
-  //       const options: FileUploadOptions = {
-  //         fileKey: 'leaseDoc',
-  //         chunkedMode: true,
-  //         fileName: file.name,
-  //         mimeType: file.mediaType
-  //       };
-
-  //       fileTransfer.upload(file.dataURI, 'http://10.0.2.2:3000/api/leases', options)
-  //         .then((data) => {
-  //           console.log('data', data);
-  //           // success
-  //         }, (err) => {
-  //           console.log('err', err);
-  //           // error
-  //         });
-  //     })
-  //     .catch((err: any) => console.log('err', err));
-  // }
+  selectFile() {
+    this.awaitingFileAttachment = true;
+    this.chooser.getFile()
+      .then((err) => {
+        this.error = err;
+        console.log('err', err);
+      }, (file) => {
+        this.awaitingFileAttachment = false;
+        this.leaseDocument = file;
+      });
+  }
 
   startCamera() {
     const cameraPreviewOpts: CameraPreviewOptions = {
@@ -166,13 +183,39 @@ export class NewLeasePage implements OnInit, OnDestroy {
           console.log('data', data);
           // success
         }, (err) => {
+          this.stopCamera();
           console.log('err', err);
           // error
         });
     });
-      // this.base64Image = 'data:image/jpeg;base64,' + base64PictureData;
-      // this.events.publish("cameraPhoto", this.base64Image, this.configlocId);
-      // this.navCtrl.pop();
+  }
+
+  selectDocumentOrPhoto() {
+    this.actionSheetCtrl.create({
+      header: 'Choose an Action',
+      buttons: [
+        {
+          text: 'Take Photo',
+          handler: () => {
+            // this.openBookingModal('select');
+            this.startCamera();
+          }
+        },
+        {
+          text: 'Attach File/Photo',
+          handler: () => {
+            // this.upload();
+            // this.openBookingModal('random');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    }).then(actionSheetEl => {
+      actionSheetEl.present();
+    });
   }
 
 

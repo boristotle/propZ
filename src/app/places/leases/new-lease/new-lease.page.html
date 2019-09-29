@@ -90,10 +90,26 @@
           <ion-row>
               <ion-col size-sm="12" offset-sm="0">
                 <ion-item>
-                    <ion-button (click)="startCamera()">Attach Lease</ion-button>
+                    <!-- <ion-button (click)="startCamera()">Attach Lease</ion-button> -->
+                    <!-- <ion-button (click)="selectDocumentOrPhoto()">Attach Lease</ion-button> -->
+                    <ion-button (click)="selectFile()">Attach Lease</ion-button>
                 </ion-item>
               </ion-col>
           </ion-row>
+          <!-- <ion-row>
+              <ion-col size-sm="12" offset-sm="0">
+                <ion-item>
+                    ERROR {{ error | json }}
+                </ion-item>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col size-sm="12" offset-sm="0">
+                <ion-item>
+                    FILE {{ leaseDocument | json }}
+                </ion-item>
+              </ion-col>
+          </ion-row> -->
     </ion-grid>
   </form>
 </ion-content>

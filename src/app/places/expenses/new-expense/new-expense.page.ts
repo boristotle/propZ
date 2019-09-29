@@ -1,11 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { PlacesService } from 'src/app/places/places.service';
+import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data-service';
 import { Property } from '../../property.model';
 import { Observable } from 'rxjs';
+import { Chooser } from '@ionic-native/chooser/ngx';
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
 
 @Component({
   selector: 'app-new-expense',
@@ -16,11 +17,15 @@ export class NewExpensePage implements OnInit {
   form: FormGroup;
   properties$: Observable<Property[] | {}>;
   expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
+  expenseFile;
+  awaitingFileAttachment = false; // NOT IMPLEMENTED, use this to wait for file chooser to resolve
 
   constructor(
-    private placesService: PlacesService,
     private dataService: DataService,
     private router: Router,
+    private transfer: FileTransfer,
+    private chooser: Chooser,
+    private actionSheetCtrl: ActionSheetController,
     private loadingCtrl: LoadingController,
     ) { }
 
@@ -51,12 +56,44 @@ export class NewExpensePage implements OnInit {
     });
   }
 
+  selectDocumentOrPhoto() {
+    this.actionSheetCtrl.create({
+      header: 'Choose an Action',
+      buttons: [
+        {
+          text: 'Take Photo',
+          handler: () => {
+            // TODO:  add ability to upload photo
+            // this.startCamera();
+          }
+        },
+        {
+          text: 'Attach File/Photo',
+          handler: () => {
+            this.selectFile();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    }).then(actionSheetEl => {
+      actionSheetEl.present();
+    });
+  }
 
-
-  // setFormValue(event, field) {
-  //   this.form.value[field] = event.detail.value;
-  //   console.log('this.form', this.form.value);
-  // }
+  selectFile() {
+    this.awaitingFileAttachment = true;
+    this.chooser.getFile()
+      .then((err) => {
+        // this.error = err;
+        console.log('err', err);
+      }, (file) => {
+        this.awaitingFileAttachment = false;
+        this.expenseFile = file;
+      });
+  }
 
   onCreateExpense() {
     console.log('this.form', this.form);
@@ -71,13 +108,37 @@ export class NewExpensePage implements OnInit {
       loadingEl.present();
       const expense = { ...this.form.value };
 
-      this.dataService
-        .createExpense(expense)
-        .subscribe(() => {
+      const fileTransfer = this.transfer.create();
+      const options: FileUploadOptions = {
+        fileKey: 'expenseDoc',
+        chunkedMode: true,
+        fileName: this.expenseFile.name,
+        mimeType: this.expenseFile.mediaType,
+        params: expense
+      };
+
+      fileTransfer.upload(this.expenseFile.dataURI,
+        encodeURI('http://10.0.2.2:3000/api/expenses'),
+        options
+      )
+        .then((data) => {
           loadingEl.dismiss();
           this.form.reset();
           this.router.navigate(['/places/tabs/expenses']);
+          console.log('data', data);
+          // success
+        }, (err) => {
+          console.log('err', err);
+          // error
         });
+
+      // this.dataService
+      //   .createExpense(expense)
+      //   .subscribe(() => {
+      //     loadingEl.dismiss();
+      //     this.form.reset();
+      //     this.router.navigate(['/places/tabs/expenses']);
+      //   });
     });
 
   }
