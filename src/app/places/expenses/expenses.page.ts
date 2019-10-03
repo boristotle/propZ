@@ -18,7 +18,7 @@ export class ExpensesPage implements OnInit {
   expenses: Expense[] = [];
   filteredExpenses;
   properties: Property[] = [];
-  expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawncare', 'poolcare', 'other'];
+  expenseCategories = ['utility', 'service', 'materials', 'mortgage', 'insurance', 'taxes', 'lawn care', 'pool care', 'other'];
   propertyId;
   category;
 

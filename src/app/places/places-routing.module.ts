@@ -65,6 +65,10 @@ const routes: Routes = [
                     {
                         path: ':leaseId',
                         loadChildren: './leases/lease-details/lease-details.module#LeaseDetailsPageModule'
+                    },
+                    {
+                        path: ':leaseId/payment',
+                        loadChildren: './leases/lease-payment/lease-payment.module#LeasePaymentPageModule'
                     }
                 ]
             },
