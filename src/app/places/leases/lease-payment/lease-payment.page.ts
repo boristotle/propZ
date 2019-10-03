@@ -34,7 +34,7 @@ export class LeasePaymentPage implements OnInit, OnDestroy {
           updateOn: 'change',
           validators: [Validators.required]
         }),
-        amount: new FormControl(null, {
+        amountPaid: new FormControl(null, {
           updateOn: 'change',
           validators: [Validators.required]
         })
